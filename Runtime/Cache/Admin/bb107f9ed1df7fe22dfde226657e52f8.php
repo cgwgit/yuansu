@@ -21,16 +21,16 @@
 <script type="text/javascript" src="/Public/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-		<title>商品列表</title>
+		<title>产品列表</title>
 	</head>
 	<body>
-		<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 商品管理 <span class="c-gray en">&gt;</span> 商品列表
+		<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 产品管理 <span class="c-gray en">&gt;</span> 产品列表
 			<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新">
 				<i class="Hui-iconfont">&#xe68f;</i></a>
 		</nav>
 		<div class="page-container">
 <!-- 			<div class="text-c">
-				<input type="text" name="" id="" placeholder="商品标题" style="width:250px" class="input-text">
+				<input type="text" name="" id="" placeholder="产品标题" style="width:250px" class="input-text">
 				<button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜商品</button>
 			</div> -->
 			<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" id="btndel" class="btn btn-danger radius" onclick="activity_dels(this)">
@@ -46,50 +46,33 @@
 							<th width="80">ID</th>
 							<th width="120">产品品名</th>
 							<th width="120">产品容积</th>
-							<thwidth="120">产品颜色</th>
+							<th width="120">产品颜色</th>
 							<th width="180">产品特点</th>
 							<th width="180">产品logo</th>
+							<th width="180">添加时间</th>
+							<th width="180">修改时间</th>
 							<th width="180">操作</th>
 						</tr>
 					</thead>
 					<tbody>
-					<?php if(is_array($action)): foreach($action as $key=>$v): ?><tr class="text-c">
-							<td><input type="checkbox" id="aid" name="huodong" value="<?php echo $v['id'] ?>" /></td>
-							<td><?php echo $v['id'] ?></td>
-							<td><?php echo date('Y-m-d H:i:s', $v['stime']) ?></td>
-							<td><?php echo date('Y-m-d H:i:s', $v['etime']) ?></td>
-							<td class="text-l"><u style="cursor:pointer" class="text-primary" onClick="article_list('查看','/index.php/Admin/Goods/showList/aid/<?php echo $v['id'] ?>','800','500')" title="查看"><?php echo $v['title'] ?></u></td>
-							<td><?php echo $v['sumperson'] ?></td>
-							<td><?php echo $v['money'] ?></td>
-							<td><?php echo $v['summoney'] ?></td>
-							<td>http://166xj71935.51mypc.cn/index.php/Home/Index/index/id/<?php echo $v['dizhi'] ?></td>
-							<td class="td-status" id="kai">
-							<?php if($v['status'] == 1): ?><span class="label label-success radius">已开启</span>
-							<?php elseif($v['status'] == 3): ?>
-							   <span class="label label-default radius">未开启</span>
-							 <?php else: ?>
-							   <span class="label label-default radius">已关闭</span><?php endif; ?></td>
-
+					<?php if(is_array($goods)): foreach($goods as $key=>$v): ?><tr class="text-c">
+							<td><input type="checkbox" id="aid" name="huodong" value="<?php echo $v['goods_id'] ?>" /></td>
+							<td><?php echo $v['goods_id'] ?></td>
+							<td><?php echo $v['goods_name'] ?></td>
+							<td><?php echo $v['goods_rongji'] ?></td>
+							<td><?php echo $v['goods_color'] ?></td>
+							<td><?php echo $v['goods_tedian'] ?></td>
+							<td><img src = "<?php echo substr($v['goods_logo'],1)?>" width="50" height = "50"></td>
+							<td><?php echo date('Y-m-d H:i:s', $v['goods_addtime']) ?></td>
+							<td><?php echo date('Y-m-d H:i:s', $v['goods_uptime']) ?></td>
 							<td class="td-manage">
-							<?php if($v['status'] == 0): ?><a style="text-decoration:none" onClick="activity_start(this,'<?php echo $v['id'] ?>')" href="javascript:;" title="启用">
-									<i class="Hui-iconfont">&#xe615;</i>
-								</a>
-							<?php elseif($v['status'] == 3): ?>
-							     <a style="text-decoration:none" onClick="activity_start(this,'<?php echo $v['id'] ?>')" href="javascript:;" title="启用">
-									<i class="Hui-iconfont">&#xe615;</i>
-								</a>
-							<?php else: ?>
-                              <a style="text-decoration:none" onClick="activity_stop(this,'<?php echo $v['id'] ?>')" href="javascript:;" title="关闭">
-									<i class="Hui-iconfont">&#xe615;</i>
-								</a><?php endif; ?>
-							    
-								<a title="编辑" href="/index.php/Admin/Goods/editAction/aid/<?php echo $v['id'] ?>" class="ml-10" style="text-decoration:none">
+								<a title="编辑" href="/index.php/Admin/Goods/editGoods/aid/<?php echo $v['goods_id'] ?>" class="ml-10" style="text-decoration:none">
 									<i class="Hui-iconfont">&#xe6df;</i>
 								</a>
-								<a title="删除" href="javascript:;" onclick="activity_del(this,'<?php echo $v['id'] ?>')" class="ml-10" style="text-decoration:none">
+								<a title="删除" href="javascript:;" onclick="activity_del(this,'<?php echo $v['goods_id'] ?>')" class="ml-10" style="text-decoration:none">
 									<i class="Hui-iconfont">&#xe6e2;</i>
 								</a>
-								<a href="javascript:;" class="ml-10" onclick="activity_detail('参与详情','/index.php/Admin/Cinfo/showList/aid/<?php echo $v['id'] ?>','800','500')">参与详情</a>
+								<a href="javascript:;" class="ml-10" onclick="activity_detail('查看','/index.php/Admin/Goods/showList/aid/<?php echo $v['goods_id'] ?>','800','500')">查看</a>
 							</td>
 						</tr><?php endforeach; endif; ?>
 					</tbody>
@@ -192,7 +175,7 @@
 				layer.confirm('确认要删除吗？', function(index) {
 					$.ajax({
 						type: 'get',
-						url: '/index.php/Admin/Goods/delAction',
+						url: '/index.php/Admin/Goods/delGoods',
 						data:{'aid':id},
 						dataType: 'json',
 						success: function(data) {

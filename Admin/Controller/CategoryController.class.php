@@ -215,4 +215,13 @@ class CategoryController extends Controller {
         	
         }
     }
+
+        //得到下级的分类信息
+    public function getCatInfoB(){
+        $cat_id = $_GET['cat_ida'];
+        $categoryB = M('category')->where(array('cat_pid' => $cat_id))->select();
+        if($categoryB){
+            echo json_encode($categoryB);exit;
+        }
+    }
 }

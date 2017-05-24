@@ -26,14 +26,6 @@
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 会员员管理 <span class="c-gray en">&gt;</span> 会员列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-	<!--<div class="text-c"> 日期范围：
-		<input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}' })" id="datemin" class="input-text Wdate" style="width:120px;">
-		-
-		<input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d' })" id="datemax" class="input-text Wdate" style="width:120px;">
-		<input type="text" class="input-text" style="width:250px" placeholder="输入管理员名称" id="" name="">
-		<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
-	</div>-->
-<!-- 	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="admin_add('添加管理员','__MODULE__/User/addUser','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a></span>  </div> -->
 	<table class="table table-border table-bordered table-bg">
 		<thead>
 			<tr>
@@ -50,18 +42,15 @@
 			</tr>
 		</thead>
 		<tbody>
-		   <foreach name="admin" item="v">
+		   <foreach name="user" item="v">
 			<tr class="text-c">
-				<td><?php echo $v['id'] ?></td>
-				<td><?php echo $v['name'] ?></td>
-				<td>******</td>
-				<td><?php echo date('Y-m-d H:i:s', $v['addtime']) ?></td>
+				<td><?php echo $v['user_id'] ?></td>
+				<td><?php echo $v['user_name'] ?></td>
+				<td><?php echo $v['user_tel'] ?></td>
+				<td><?php echo $v['user_img'] ?></td>
+				<td><?php echo date('Y-m-d H:i:s', $v['user_addtime']) ?></td>
 				<td class="td-manage">
-							<!-- <a style="text-decoration:none" class="ml-5" onClick="picture_edit('图库编辑','picture-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> -->
-						<!-- 	<a title="编辑" href="__CONTROLLER__/member_edit/id/<?php echo $v['id'] ?>" class="ml-10" style="text-decoration:none">
-								<i class="Hui-iconfont">&#xe6df;</i>
-							</a> -->
-							<a title="删除" href="javascript:;" onclick="activity_del(this,'<?php echo $v['id'] ?>')" class="ml-10" style="text-decoration:none">
+							<a title="删除" href="javascript:;" onclick="activity_del(this,'<?php echo $v['user_id'] ?>')" class="ml-10" style="text-decoration:none">
 								<i class="Hui-iconfont">&#xe6e2;</i>
 							</a>
 				</td>

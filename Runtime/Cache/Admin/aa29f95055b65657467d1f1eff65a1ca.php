@@ -40,37 +40,37 @@
             <article class="page-container pl-20 pr-20">
                 <form class="form form-horizontal" id="form-article-add" method="post" action="/index.php/Admin/Shop/editShop" enctype="multipart/form-data" onsubmit="return false">
                     <div class="row cl">
-                        <label class="col-xs-4 col-sm-2 text-r"><span class="c-red">*</span>门店名称：</label>
+                        <label class="col-xs-4 col-sm-2 text-r">门店名称：</label>
                         <div class="col-xs-8 col-sm-9">
                             <?php echo ($shopinfo['shop_name']); ?>
                         </div>
                     </div>
                     <div class="row cl">
-                        <label class="col-xs-4 col-sm-2 text-r"><span class="c-red">*</span>门店地址：</label>
+                        <label class="col-xs-4 col-sm-2 text-r">门店地址：</label>
                         <div class="col-xs-8 col-sm-9">
                             <?php echo ($shopinfo['shop_position']); ?>
                         </div>
                     </div>
                     <div class="row cl">
-                        <label class="col-xs-4 col-sm-2 text-r"><span class="c-red">*</span>门店电话：</label>
+                        <label class="col-xs-4 col-sm-2 text-r">门店电话：</label>
                         <div class="col-xs-8 col-sm-9">
                           <?php echo ($shopinfo['shop_tel']); ?>
                         </div>
                     </div>
                     <div class="row cl">
-                        <label class="col-xs-4 col-sm-2 text-r"><span class="c-red">*</span>营业时间：</label>
+                        <label class="col-xs-4 col-sm-2 text-r">营业时间：</label>
                         <div class="col-xs-8 col-sm-9">
                             <?php echo ($shopinfo['shop_stime']); ?>--<?php echo ($shopinfo['shop_etime']); ?>
                         </div>
                     </div>
                     <div class="row cl">
-                        <label class="col-xs-4 col-sm-2 text-r"><span class="c-red">*</span>门店推荐：</label>
+                        <label class="col-xs-4 col-sm-2 text-r">门店推荐：</label>
                         <div class="col-xs-8 col-sm-9">
                            <?php echo ($shopinfo['shop_tuijian']); ?>
                         </div>
                     </div>
                     <div class="row cl">
-                        <label class="col-xs-4 col-sm-2 text-r"><span class="c-red">*</span>门店特色：</label>
+                        <label class="col-xs-4 col-sm-2 text-r">门店特色：</label>
                         <div class="col-xs-8 col-sm-9">
                            <?php echo ($shopinfo['shop_tese']); ?>
                         </div>

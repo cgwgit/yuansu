@@ -10,14 +10,14 @@ class UserController extends Controller {
      }   
 	//用户显示列表
 	public function showList(){
-		$admins = M('user')->select();
+		$users = M('user')->select();
 		$this->assign('user', $users);
 		$this->display();
 	}
     //删除用户
   public function member_del(){
     $id = I('get.id');
-    $rst = M('user')->where(array('id' => $id))->delete();
+    $rst = M('user')->where(array('user_id' => $id))->delete();
     if($rst){
       echo json_encode(array('code' => 1,'msg' => '删除成功'));exit;
     }else{

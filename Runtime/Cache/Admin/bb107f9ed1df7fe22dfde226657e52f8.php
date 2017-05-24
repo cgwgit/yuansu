@@ -115,67 +115,13 @@
 			function activity_edit(title, url, w, h) {
 				layer_show(title, url, w, h);
 			}
-			/*商品-关闭*/
-			function activity_stop(obj, id) {
-				layer.confirm('确认要关闭吗？', function(index) {
-					           $.ajax({
-						        type: "get",
-						        dataType: "json",
-						        url: '/index.php/Admin/Goods/endAction',
-						        data: {'aid':id},
-						        success: function (data) {
-						            if(data.code == 1) {
-						                //此处请求后台程序，下方是成功后的前台处理……
-											$(obj).parents("tr").find(".td-manage").prepend('<a onClick="activity_start(this,<?php echo $v['id'] ?>)" href="javascript:;" title="开启" style="text-decoration:none"><i class="Hui-iconfont">&#xe615;</i></a>');
-											$(obj).parents("tr").find(".td-status").html('<span class="label label-default radius">已关闭</span>');
-											$(obj).remove();
-											layer.msg('已关闭', {
-												icon: 5,
-												time: 1000
-											});
-						            }
-						        }
-				});
-				});
-			}
 
-			/*商品-开启*/
-			function activity_start(obj, id) {
-				layer.confirm('确认要开启吗？', function(index) {
-					//此处请求后台程序，下方是成功后的前台处理……
-                           $.ajax({
-						        type: "get",
-						        dataType: "json",
-						        url: '/index.php/Admin/Goods/startAction',
-						        data: {'aid':id},
-						        success: function (data) {
-						            if(data.code == 0) {
-						                layer.msg('请关闭正在进行的商品', {
-												icon: 6,
-												time: 1000
-											});
-						            }else if(data.code == 1){
-						            		$(obj).parents("tr").find(".td-manage").prepend('<a onClick="activity_stop(this,<?php echo $v['id'] ?>)" href="javascript:;" title="关闭" style="text-decoration:none"><i class="Hui-iconfont">&#xe631;</i></a>');
-											$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已开启</span>');
-											$(obj).remove();
-											layer.msg('已开启!', {
-												icon: 6,
-												time: 1000
-											});
-						            }
-
-						        }
-						   
-				
-				});
-                 	});
-			}
 			/*商品-删除*/
 			function activity_del(obj, id) {
 				layer.confirm('确认要删除吗？', function(index) {
 					$.ajax({
 						type: 'get',
-						url: '/index.php/Admin/Goods/delGoods',
+						url: '/index.php/Admin/Goods/del_Goods',
 						data:{'aid':id},
 						dataType: 'json',
 						success: function(data) {
@@ -206,7 +152,7 @@
 	        ids = ids.substring(0,ids.length-1);
 					$.ajax({
 						type: 'get',
-						url: '/index.php/Admin/Goods/delAction',
+						url: '/index.php/Admin/Goods/del_Goods',
 						data:{'aid':ids},
 						dataType: 'json',
 						success: function(data) {

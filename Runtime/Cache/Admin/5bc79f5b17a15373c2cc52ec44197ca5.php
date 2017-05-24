@@ -24,7 +24,7 @@
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
     <!--/meta 作为公共模版分离出去-->
-    <title>分类管理-新增分类</title>
+    <title>banner管理-新增banner</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
 </head>

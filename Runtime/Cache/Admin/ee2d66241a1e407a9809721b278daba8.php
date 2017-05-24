@@ -40,7 +40,7 @@
             <article class="page-container pl-20 pr-20">
                 <form class="form form-horizontal" id="form-article-add" method="post" action="/index.php/Admin/Banner/editShop" enctype="multipart/form-data" onsubmit="return false">
                     <div class="row cl">
-                        <label class="col-xs-4 col-sm-2 text-r"><span class="c-red">*</span>门店名称：</label>
+                        <label class="col-xs-4 col-sm-2 text-r">门店名称：</label>
                         <div class="col-xs-8 col-sm-9">
                             <?php echo ($banner['banner_name']); ?>
                         </div>

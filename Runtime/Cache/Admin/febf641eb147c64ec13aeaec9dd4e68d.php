@@ -109,19 +109,6 @@
                           $('#gallery-tab-show').append(' <div class="aa"><label class="form-label col-xs-4 col-sm-2"><span class="STYLE19" onclick="$(this).parent().parent().remove()">[-]&nbsp;</span>门店图片:</label><div class="formControls col-xs-8 col-sm-9"><input type="file" class="input-text" value="20" placeholder="" name="shop_pic[]"></div></div>');
                         }
                     </script>
-                    <!-- <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#a8c7ce" id="gallery-tab-show" style='display:none;'>
-                      <tr>
-                        <td height="20" bgcolor="#FFFFFF" class="STYLE6">
-                           <div align="right"><span class="STYLE19" onclick="add_pics()">[+]&nbsp;相册图片：</span>
-                           </div>
-                     </td>
-                        <td height="20" bgcolor="#FFFFFF" class="STYLE19">
-                          <div align="left">
-                        <input type="file" name="pics_tu[]" />
-                        </div>
-                        </td>
-                      </tr>
-                    </table> -->
                     <div class="row cl mt-20 mb-20" id="gallery-tab-show">
                                 <div class="aa">
                                     <label class="form-label col-xs-4 col-sm-2"><span class="STYLE19" onclick="add_pics()">[+]&nbsp;</span>门店展示图:</label>

@@ -43,6 +43,7 @@
                 <div class="formControls col-xs-8 col-sm-9">
                     <input type="file" class="input-text" value="20" placeholder="" name="banner_Pic">
                     <img src="<?php echo (substr($banner['banner_pic'],1)) ?>" width="50" height="50"/>
+                    可以通过再次上传图片，替换已有图片
                      <input type="hidden" name="yuanpic" value="<?php echo $banner['banner_pic'] ?>"></input>
                 <input type="hidden" name="id" value="<?php echo $banner['id'] ?>"></input>
                 </div>

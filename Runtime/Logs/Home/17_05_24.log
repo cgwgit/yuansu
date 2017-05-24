@@ -1,0 +1,9 @@
+[ 2017-05-24T08:32:59+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.037722s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.023080s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.023149s ]
+ERR: 模板不存在:E:/xiangmu/juyuansu/Home/View/Index/index.html
+

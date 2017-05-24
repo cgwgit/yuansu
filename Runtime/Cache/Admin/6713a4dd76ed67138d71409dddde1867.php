@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE HTML>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -7,17 +7,17 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<meta http-equiv="Cache-Control" content="no-siteapp" />
 		<!--[if lt IE 9]>
-<script type="text/javascript" src="__PUBLIC__/lib/html5shiv.js"></script>
-<script type="text/javascript" src="__PUBLIC__/lib/respond.min.js"></script>
+<script type="text/javascript" src="/Public/lib/html5shiv.js"></script>
+<script type="text/javascript" src="/Public/lib/respond.min.js"></script>
 <![endif]-->
-		<link rel="stylesheet" type="text/css" href="__PUBLIC__/static/h-ui/css/H-ui.min.css" />
-		<link rel="stylesheet" type="text/css" href="__PUBLIC__/static/h-ui.admin/css/H-ui.admin.css" />
-		<link rel="stylesheet" type="text/css" href="__PUBLIC__/lib/Hui-iconfont/1.0.8/iconfont.css" />
-		<link rel="stylesheet" type="text/css" href="__PUBLIC__/static/h-ui.admin/skin/default/skin.css" id="skin" />
-		<link rel="stylesheet" type="text/css" href="__PUBLIC__/static/h-ui.admin/css/style.css" />
-		<link href="__PUBLIC__/lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" href="/Public/static/h-ui/css/H-ui.min.css" />
+		<link rel="stylesheet" type="text/css" href="/Public/static/h-ui.admin/css/H-ui.admin.css" />
+		<link rel="stylesheet" type="text/css" href="/Public/lib/Hui-iconfont/1.0.8/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="/Public/static/h-ui.admin/skin/default/skin.css" id="skin" />
+		<link rel="stylesheet" type="text/css" href="/Public/static/h-ui.admin/css/style.css" />
+		<link href="/Public/lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
 		<!--[if IE 6]>
-<script type="text/javascript" src="__PUBLIC__/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script type="text/javascript" src="/Public/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
 		<title>添加产品 </title>
@@ -31,7 +31,7 @@
 			    if(typeof catinfo[cat_ida] === 'undefined'){
 			      //通过ajax获取次级分类信息
 			      $.ajax({
-			        url:"__MODULE__/Category/getCatInfoB",
+			        url:"/index.php/Admin/Category/getCatInfoB",
 			        data:{'cat_ida':cat_ida},
 			        dataType:'json',
 			        async:false,
@@ -67,12 +67,12 @@
 				</div>
 				<div class="tabCon">
 					<article class="page-container pl-20 pr-20">
-					      <form class="form form-horizontal" id="form-article-add" method="post" action="__CONTROLLER__/editGoods" enctype="multipart/form-data" onsubmit="return false">
+					      <form class="form form-horizontal" id="form-article-add" method="post" action="/index.php/Admin/Goods/editGoods" enctype="multipart/form-data" onsubmit="return false">
 							<div class="row cl">
 								<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>产品名称：</label>
 								<div class="formControls col-xs-8 col-sm-9">
-									<input type="text" class="input-text" value="{$goodsinfo['goods_name']}" placeholder=""  name="goods_Name">
-									<input type="hidden" class="input-text" value="{$goodsinfo['goods_id']}" id="goods_id" placeholder=""  name="goods_Id">
+									<input type="text" class="input-text" value="<?php echo ($goodsinfo['goods_name']); ?>" placeholder=""  name="goods_Name">
+									<input type="hidden" class="input-text" value="<?php echo ($goodsinfo['goods_id']); ?>" id="goods_id" placeholder=""  name="goods_Id">
 								</div>
 							</div>
 							<div class="row cl">
@@ -82,16 +82,14 @@
 									<span class="select-box">
 										<select  id="cat_idA" onchange="show_catinfo(this,'B')"class="select">
 										    <option value='0'>-请选择-</option>
-											<foreach name='categorys' item='c'>
-									          <option value='{$c.cat_id}' <if condition="$c.cat_id eq $category['cat_pid']" >selected="selected"</if>>{$c.cat_name}</option>
-									        </foreach>
+											<?php if(is_array($categorys)): foreach($categorys as $key=>$c): ?><option value='<?php echo ($c["cat_id"]); ?>' <?php if($c["cat_id"] == $category['cat_pid']): ?>selected="selected"<?php endif; ?>><?php echo ($c["cat_name"]); ?></option><?php endforeach; endif; ?>
 										</select>
 										</span>
 									</div>
 									<div class="col-xs-6 col-sm-6">
                                         <span class="select-box">
 										<select name="cat_id" id="cat_idB" class="select">
-											<option value='{$category['cat_id']}'>{$category['cat_name']}</option>
+											<option value='<?php echo ($category['cat_id']); ?>'><?php echo ($category['cat_name']); ?></option>
 										</select>
 									</div>
 								</div>
@@ -99,26 +97,26 @@
 							<div class="row cl">
 								<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>产品容积：</label>
 								<div class="formControls col-xs-8 col-sm-9"> 
-									<input type="text" class="input-text" value="{$goodsinfo['goods_rongji']}" placeholder=""  name="rongji">
+									<input type="text" class="input-text" value="<?php echo ($goodsinfo['goods_rongji']); ?>" placeholder=""  name="rongji">
 								</div>
 							</div>
 							<div class="row cl">
 								<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>产品颜色：</label>
 								<div class="formControls col-xs-8 col-sm-9">
-									<input type="text" class="input-text" value="{$goodsinfo['goods_color']}" placeholder="" name="yanse">
+									<input type="text" class="input-text" value="<?php echo ($goodsinfo['goods_color']); ?>" placeholder="" name="yanse">
 								</div>
 							</div>
 							<div class="row cl">
 								<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>产品特点：</label>
 								<div class="formControls col-xs-8 col-sm-9">
-									<input type="text" class="input-text" value="{$goodsinfo['goods_tedian']}" placeholder=""  name="tedian">
+									<input type="text" class="input-text" value="<?php echo ($goodsinfo['goods_tedian']); ?>" placeholder=""  name="tedian">
 								</div>
 							</div>
 							<div class="row cl">
 								<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>首页展示：</label>
 								<div class="formControls col-xs-8 col-sm-9">
-									是<input type="radio" value="1"<if condition="$goodsinfo['status'] eq 1" > checked="checked"</if>  name="status">
-									否<input type="radio" value="0"<if condition="$goodsinfo['status'] eq 0" > checked="checked" </if> name="status">
+									是<input type="radio" value="1"<?php if($goodsinfo['status'] == 1): ?>checked="checked"<?php endif; ?>  name="status">
+									否<input type="radio" value="0"<?php if($goodsinfo['status'] == 0): ?>checked="checked"<?php endif; ?> name="status">
 								</div>
 							</div>
 							<div class="row cl mt-20 mb-20">
@@ -155,7 +153,7 @@
                         	var index = layer.load(0, {shade: false});
                            /*简介-删除*/
                             $("#form1").ajaxSubmit({
-				                 url:"__CONTROLLER__/edit_jianjie/id/jianjie_add/goods_id/"+goods_id,
+				                 url:"/index.php/Admin/Goods/edit_jianjie/id/jianjie_add/goods_id/"+goods_id,
 				                 data:$("#form1").serialize(),
 				                 type:"post",
 				                 dataType: "json",
@@ -174,7 +172,7 @@
 			            function jianjie_del(obj, pics_id) {
 			                layer.confirm('确认要删除吗？', function(index) {
 			                       $.ajax({
-			                            url:"__CONTROLLER__/del_Pic",
+			                            url:"/index.php/Admin/Goods/del_Pic",
 			                            data:{'pics_id':pics_id},
 			                            success:function(msg){
 			                              //dom方式删除li的元素节点对象
@@ -191,7 +189,7 @@
 			         function edit_jianjie(id){
 			         	var index = layer.load(0, {shade: false});
 		                 $("#form_jianije_"+id).ajaxSubmit({
-				                 url:"__CONTROLLER__/edit_jianjie",
+				                 url:"/index.php/Admin/Goods/edit_jianjie",
 				                 data:$("#form_jianije_"+id).serialize(),
 				                 type:"post",
 				                 dataType: "json",
@@ -209,20 +207,17 @@
 			         }
                 </script>
 				<div class="tabCon" id="jianjie">
-				<empty name="jianjie" >
-				   <span class="STYLE19" onclick="add_jianjie()">[+]&nbsp;</span>
-				</empty>
-				   <foreach name="jianjie" item="v" >
-					<article class="pl-20 pr-20 xiangqing1 pics_{$v.id}">
-					   <form class="form form-horizontal jianjie" method="post" action="__CONTROLLER__/editGoods" enctype="multipart/form-data" onsubmit="return false" id="form_jianije_{$v.id}">
+				<?php if(empty($jianjie)): ?><span class="STYLE19" onclick="add_jianjie()">[+]&nbsp;</span><?php endif; ?>
+				   <?php if(is_array($jianjie)): foreach($jianjie as $key=>$v): ?><article class="pl-20 pr-20 xiangqing1 pics_<?php echo ($v["id"]); ?>">
+					   <form class="form form-horizontal jianjie" method="post" action="/index.php/Admin/Goods/editGoods" enctype="multipart/form-data" onsubmit="return false" id="form_jianije_<?php echo ($v["id"]); ?>">
 						<div class="item-demo form-horizontal">
 							<div class="pb-20">
 								<div class="row cl">
 									<label class="form-label col-xs-4 col-sm-2"><span class="STYLE19" onclick="add_jianjie()">[+]&nbsp;</span><span class="STYLE19" onclick="jianjie_del(this,'<?php echo $v['id'] ?>')">[-]&nbsp;</span><span class="c-red">*</span>标题：</label>
 									<div class="formControls col-xs-8 col-sm-9">
-										<input type="text" class="input-text" value="{$v['goods_jianjie_title']}" placeholder=""  name="jianjie_title">
-										<input type="hidden" name="id" value="{$v['id']}" id="jianjie_id"></input>
-										<input type="hidden" name="goods_Id" value="{$v['goods_id']}"></input>
+										<input type="text" class="input-text" value="<?php echo ($v['goods_jianjie_title']); ?>" placeholder=""  name="jianjie_title">
+										<input type="hidden" name="id" value="<?php echo ($v['id']); ?>" id="jianjie_id"></input>
+										<input type="hidden" name="goods_Id" value="<?php echo ($v['goods_id']); ?>"></input>
 									</div>
 								</div>
 								<div class="row cl mt-20 mb-20">
@@ -236,13 +231,13 @@
 								<div class="row cl">
 									<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>简介：</label>
 									<div class="formControls col-xs-8 col-sm-9">
-										<input type="text" class="input-text" value="{$v['goods_jianjie_content']}" placeholder=""name="jianjie_content">
+										<input type="text" class="input-text" value="<?php echo ($v['goods_jianjie_content']); ?>" placeholder=""name="jianjie_content">
 									</div>
 								</div>
 								<div class="row cl">
 									<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>链接地址：</label>
 									<div class="formControls col-xs-8 col-sm-9">
-										<input type="text" class="input-text" value="{$v['goods_jianjie_url']}" placeholder=""name="jianjie_url">
+										<input type="text" class="input-text" value="<?php echo ($v['goods_jianjie_url']); ?>" placeholder=""name="jianjie_url">
 									</div>
 								</div>
 							</div>
@@ -253,8 +248,7 @@
 						</div>
 				    </div>
 			 </form>
-					</article>
-				</foreach>
+					</article><?php endforeach; endif; ?>
 				</div>
 				<script type="text/javascript">
                         function add_yingyong(){
@@ -266,7 +260,7 @@
                         	var index = layer.load(0, {shade: false});
                            /*简介-删除*/
                             $("#form_yingyong").ajaxSubmit({
-				                 url:"__CONTROLLER__/edit_yingyong/id/yingyong_add/goods_id/"+goods_id,
+				                 url:"/index.php/Admin/Goods/edit_yingyong/id/yingyong_add/goods_id/"+goods_id,
 				                 data:$("#form_yingyong").serialize(),
 				                 type:"post",
 				                 dataType: "json",
@@ -287,7 +281,7 @@
 			         function edit_yingyong(id){
 			         	var index = layer.load(0, {shade: false});
 		                 $("#form_yingyong_"+id).ajaxSubmit({
-				                 url:"__CONTROLLER__/edit_yingyong",
+				                 url:"/index.php/Admin/Goods/edit_yingyong",
 				                 data:$("#form_yingyong_"+id).serialize(),
 				                 type:"post",
 				                 dataType: "json",
@@ -307,7 +301,7 @@
 			             function yingyong_del(obj, pics_id) {
 			                layer.confirm('确认要删除吗？', function(index) {
 			                       $.ajax({
-			                            url:"__CONTROLLER__/del_Yingyong",
+			                            url:"/index.php/Admin/Goods/del_Yingyong",
 			                            data:{'pics_id':pics_id},
 			                            success:function(msg){
 			                              //dom方式删除li的元素节点对象
@@ -322,20 +316,17 @@
 			            }
                 </script>
 				<div class="tabCon" id="yingyong">
-				<empty name="yingyong">
-				   <span class="STYLE19" onclick="add_yingyong()">[+]&nbsp;</span>
-				</empty>
-				  <foreach name="yingyong" item="v">
-					<article class="pl-20 pr-20 xiangqing2 pics_{$v.id}">
-					  <form class="form form-horizontal yingyong" method="post" action="__CONTROLLER__/edityingyong" enctype="multipart/form-data" onsubmit="return false" id="form_yingyong_{$v.id}">
+				<?php if(empty($yingyong)): ?><span class="STYLE19" onclick="add_yingyong()">[+]&nbsp;</span><?php endif; ?>
+				  <?php if(is_array($yingyong)): foreach($yingyong as $key=>$v): ?><article class="pl-20 pr-20 xiangqing2 pics_<?php echo ($v["id"]); ?>">
+					  <form class="form form-horizontal yingyong" method="post" action="/index.php/Admin/Goods/edityingyong" enctype="multipart/form-data" onsubmit="return false" id="form_yingyong_<?php echo ($v["id"]); ?>">
 						<div class="item-demo form-horizontal">
 							<div class="pb-20">
 								<div class="row cl">
 									<label class="form-label col-xs-4 col-sm-2"><span class="STYLE19" onclick="add_yingyong()">[+]&nbsp;</span><span class="STYLE19" onclick="yingyong_del(this,'<?php echo $v['id'] ?>')">[-]&nbsp;</span><span class="c-red">*</span>标题：</label>
 									<div class="formControls col-xs-8 col-sm-9">
-										<input type="text" class="input-text" value="{$v['goods_yingyong_title']}" placeholder=""  name="yingyong_title">
-										<input type="hidden" name="id" value="{$v['id']}" id="yingyong_id"></input>
-										<input type="hidden" name="goods_Id" value="{$v['goods_id']}"></input>
+										<input type="text" class="input-text" value="<?php echo ($v['goods_yingyong_title']); ?>" placeholder=""  name="yingyong_title">
+										<input type="hidden" name="id" value="<?php echo ($v['id']); ?>" id="yingyong_id"></input>
+										<input type="hidden" name="goods_Id" value="<?php echo ($v['goods_id']); ?>"></input>
 									</div>
 								</div>
 								<div class="row cl mt-20 mb-20">
@@ -350,13 +341,13 @@
 								<div class="row cl">
 									<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>简介：</label>
 									<div class="formControls col-xs-8 col-sm-9">
-										<input type="text" class="input-text" value="{$v['goods_yingyong_content']}" placeholder=""  name="yingyong_content">
+										<input type="text" class="input-text" value="<?php echo ($v['goods_yingyong_content']); ?>" placeholder=""  name="yingyong_content">
 									</div>
 								</div>
 								<div class="row cl">
 									<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>链接地址：</label>
 									<div class="formControls col-xs-8 col-sm-9">
-										<input type="text" class="input-text" value="{$v['goods_yingyong_url']}" placeholder=""name="yingyong_url">
+										<input type="text" class="input-text" value="<?php echo ($v['goods_yingyong_url']); ?>" placeholder=""name="yingyong_url">
 									</div>
 								</div>
 							</div>
@@ -367,8 +358,7 @@
 						</div>
 				    </div>
 			 </form>
-					</article>
-			      </foreach>
+					</article><?php endforeach; endif; ?>
 				</div>
 					<script type="text/javascript">
                         function add_shipin(){
@@ -379,7 +369,7 @@
                         	var index = layer.load(0, {shade: false});
                            /*简介-删除*/
                             $("#form_shipin").ajaxSubmit({
-				                 url:"__CONTROLLER__/edit_shipin/id/shipin_add/goods_id/"+goods_id,
+				                 url:"/index.php/Admin/Goods/edit_shipin/id/shipin_add/goods_id/"+goods_id,
 				                 data:$("#form_shipin").serialize(),
 				                 type:"post",
 				                 dataType: "json",
@@ -398,7 +388,7 @@
 			            function shipin_del(obj, pics_id) {
 			                layer.confirm('确认要删除吗？', function(index) {
 			                       $.ajax({
-			                            url:"__CONTROLLER__/del_Shipin",
+			                            url:"/index.php/Admin/Goods/del_Shipin",
 			                            data:{'pics_id':pics_id},
 			                            success:function(msg){
 			                              //dom方式删除li的元素节点对象
@@ -415,7 +405,7 @@
 			         function edit_shipin(id){
 			         	var index = layer.load(0, {shade: false});
 		                 $("#form_shipin_"+id).ajaxSubmit({
-				                 url:"__CONTROLLER__/edit_shipin",
+				                 url:"/index.php/Admin/Goods/edit_shipin",
 				                 data:$("#form_shipin_"+id).serialize(),
 				                 type:"post",
 				                 dataType: "json",
@@ -434,20 +424,17 @@
                 </script>
 				<div class="tabCon" id="shipin">
 				  <!-- 如果为视频为空的情况下 -->
-				 <empty name="shipin">
-				   <span class="STYLE19" onclick="add_shipin()">[+]&nbsp;</span>
-				 </empty>
-				 <foreach name="shipin" item="v">
-					<article class="pl-20 pr-20 xiangqing3 pics_{$v.id}">
-					 <form class="form form-horizontal shipin" method="post" action="__CONTROLLER__/editGoods" enctype="multipart/form-data" onsubmit="return false" id="form_shipin_{$v.id}">
+				 <?php if(empty($shipin)): ?><span class="STYLE19" onclick="add_shipin()">[+]&nbsp;</span><?php endif; ?>
+				 <?php if(is_array($shipin)): foreach($shipin as $key=>$v): ?><article class="pl-20 pr-20 xiangqing3 pics_<?php echo ($v["id"]); ?>">
+					 <form class="form form-horizontal shipin" method="post" action="/index.php/Admin/Goods/editGoods" enctype="multipart/form-data" onsubmit="return false" id="form_shipin_<?php echo ($v["id"]); ?>">
 						<div class="item-demo form-horizontal">
 							<div class="pb-20">
 								<div class="row cl">
 									<label class="form-label col-xs-4 col-sm-2"><span class="STYLE19" onclick="add_shipin()">[+]&nbsp;</span><span class="STYLE19" onclick="shipin_del(this,'<?php echo $v['id'] ?>')">[-]&nbsp;</span><span class="c-red">*</span>标题：</label>
 									<div class="formControls col-xs-8 col-sm-9">
-										<input type="text" class="input-text" value="{$v['goods_shipin_title']}" placeholder=""  name="shipin_title">
-										<input type="hidden" name="id" value="{$v['id']}" id="jianjie_id"></input>
-										<input type="hidden" name="goods_Id" value="{$v['goods_id']}"></input>
+										<input type="text" class="input-text" value="<?php echo ($v['goods_shipin_title']); ?>" placeholder=""  name="shipin_title">
+										<input type="hidden" name="id" value="<?php echo ($v['id']); ?>" id="jianjie_id"></input>
+										<input type="hidden" name="goods_Id" value="<?php echo ($v['goods_id']); ?>"></input>
 									</div>
 								</div>
 								<div class="row cl mt-20 mb-20">
@@ -461,13 +448,13 @@
 								<div class="row cl">
 									<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>简介：</label>
 									<div class="formControls col-xs-8 col-sm-9">
-										<input type="text" class="input-text" value="{$v['goods_shipin_content']}" placeholder=""  name="shipin_content">
+										<input type="text" class="input-text" value="<?php echo ($v['goods_shipin_content']); ?>" placeholder=""  name="shipin_content">
 									</div>
 								</div>
 								<div class="row cl">
 									<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>链接地址：</label>
 									<div class="formControls col-xs-8 col-sm-9">
-										<input type="text" class="input-text" value="{$v['goods_shipin_url']}" placeholder=""name="shipin_url">
+										<input type="text" class="input-text" value="<?php echo ($v['goods_shipin_url']); ?>" placeholder=""name="shipin_url">
 									</div>
 								</div>
 							</div>
@@ -478,23 +465,22 @@
 						</div>
 				    </div>
 			 </form>
-					</article>
-				</foreach>
+					</article><?php endforeach; endif; ?>
 				</div>
 			</div>
 		</div>
 			<!--_footer 作为公共模版分离出去-->
-			<script type="text/javascript" src="__PUBLIC__/lib/jquery/1.9.1/jquery.min.js"></script>
-			<script type="text/javascript" src="__PUBLIC__/lib/layer/2.4/layer.js"></script>
-			<script type="text/javascript" src="__PUBLIC__/static/h-ui/js/H-ui.min.js"></script>
-			<script type="text/javascript" src="__PUBLIC__/static/h-ui.admin/js/H-ui.admin.js"></script>
+			<script type="text/javascript" src="/Public/lib/jquery/1.9.1/jquery.min.js"></script>
+			<script type="text/javascript" src="/Public/lib/layer/2.4/layer.js"></script>
+			<script type="text/javascript" src="/Public/static/h-ui/js/H-ui.min.js"></script>
+			<script type="text/javascript" src="/Public/static/h-ui.admin/js/H-ui.admin.js"></script>
 			<!--/_footer 作为公共模版分离出去-->
 			<!--请在下方写此页面业务相关的脚本-->
-			<script type="text/javascript" src="__PUBLIC__/lib/My97DatePicker/4.8/WdatePicker.js"></script>
-			<script type="text/javascript" src="__PUBLIC__/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
-			<script type="text/javascript" src="__PUBLIC__/lib/jquery.validation/1.14.0/validate-methods.js"></script>
-			<script type="text/javascript" src="__PUBLIC__/lib/jquery.validation/1.14.0/messages_zh.js"></script>
-			<script type="text/javascript" src="__PUBLIC__/lib/webuploader/0.1.5/webuploader.min.js"></script>
+			<script type="text/javascript" src="/Public/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+			<script type="text/javascript" src="/Public/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+			<script type="text/javascript" src="/Public/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+			<script type="text/javascript" src="/Public/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+			<script type="text/javascript" src="/Public/lib/webuploader/0.1.5/webuploader.min.js"></script>
 			<script type="text/javascript">
 				$(function() {
 					$.Huitab("#tab_demo .tabBar span", "#tab_demo .tabCon", "current", "click", "0");
@@ -507,7 +493,7 @@
 					var index = layer.load(0, {shade: false});
 						$(form).ajaxSubmit({
 							type: 'post',
-							url: "__CONTROLLER__/editGoods",
+							url: "/index.php/Admin/Goods/editGoods",
 							data:$("form").serialize(),
 							dataType: "json",
 							success: function(data){
@@ -532,7 +518,7 @@
 					submitHandler:function(form){
 						$(form).ajaxSubmit({
 							type: 'post',
-							url: "__CONTROLLER__/edit_jianjie",
+							url: "/index.php/Admin/Goods/edit_jianjie",
 							data:$("form").serialize(),
 							dataType: "json",
 							success: function(data){

@@ -41,6 +41,7 @@ class ShopController extends Controller {
             !empty($post['lonlat']) ? $lonlat = trim($post['lonlat']) : $this->err('请选择所属位置');
             !empty($post['shop_Stime']) ? $shop_Stime = trim($post['shop_Stime']) : $this->err('请填写门店开始营业时间');
             !empty($post['shop_Etime']) ? $shop_Etime = trim($post['shop_Etime']) : $this->err('请填写门店结束营业时间');
+            $shop_logo = $this->logo_deal();
 			$data = array(
                     'shop_name' => $shop_Name ,
                     'shop_position' => $shop_Position,
@@ -51,6 +52,7 @@ class ShopController extends Controller {
                     'shop_etime' => $post['shop_Etime'],
                     'shop_tuijian' => $post['shop_Tuijian'],
                     'shop_tese' => $post['shop_Tese'],
+                    'shop_logo' => $shop_logo,
                     'shop_addtime' => time(),
                     'shop_uptime' => time(),
 				);
@@ -76,6 +78,7 @@ class ShopController extends Controller {
             !empty($post['lonlat']) ? $lonlat = trim($post['lonlat']) : $this->err('请选择所属位置');
             !empty($post['shop_Stime']) ? $shop_Stime = trim($post['shop_Stime']) : $this->err('请填写门店开始营业时间');
             !empty($post['shop_Etime']) ? $shop_Etime = trim($post['shop_Etime']) : $this->err('请填写门店结束营业时间');
+            $shop_logo = $this->logo_deal($post['shop_id'],$post);
 			$data = array(
 				    'shop_id' => $post['shop_id'],
                     'shop_name' => $shop_Name ,
@@ -87,6 +90,7 @@ class ShopController extends Controller {
                     'shop_etime' => $post['shop_Etime'],
                     'shop_tuijian' => $post['shop_Tuijian'],
                     'shop_tese' => $post['shop_Tese'],
+                    'shop_logo' => $shop_logo,
                     'shop_addtime' => time(),
                     'shop_uptime' => time(),
 				);
@@ -181,5 +185,42 @@ class ShopController extends Controller {
         unlink($picsinfo['shop_pic']);
         //② 删除记录信息
         D('shop_pic')->delete($pics_id);
+    }
+
+        //参数：$data是引用传递,在内部对其进行修改，在外边仍然可以访问到
+    private function logo_deal($id,$post){
+        //判断有进行正常的附加上传
+        if($_FILES['shop_logo']['error']===0){
+            //判断是否是“更新”商品的logo处理
+            //并删除旧的logo图片
+            if(!empty($post['shop_id'])){
+                $logo_info = D('shop')->
+                    field('shop_logo')->
+                    find($post['shop_id']);
+                unlink($logo_info['shop_logo']);
+            }
+            //A.大图logo处理
+            //tp框架现成功能类实现附件上传(Think\Upload.class.php)
+            //保存附件图片的根目录
+            $cfg = array(
+                'rootPath'      =>  './Public/Upload/', //保存根路径
+                'exts'          =>  array('jpg','jpeg','png','gif'), //允许上传的文件后缀
+            );
+            $up = new \Think\Upload($cfg);
+            //通过uploadOne的返回值可以获得附件上传到服务器的情况信息
+            //例如：存储目录、存储名字等
+            $z = $up -> uploadOne($_FILES['shop_logo']);
+            //整理附件的路径 和 名字信息，存储到数据库指定字段里边
+            $biglogoname = $up->rootPath.$z['savepath'].$z['savename'];
+            return $data['shop_logo'] = $biglogoname;//存储到数据库
+        }else{
+            if($post){
+                return $post['yuanshop_logo'];
+            }else{
+                M('shop')->where(array('shop_id' => $id))->delete();
+                echo json_encode(array('code' => 0,'msg' => '请添加门店logo图片'));exit;
+            }
+            
+        }
     }
  }

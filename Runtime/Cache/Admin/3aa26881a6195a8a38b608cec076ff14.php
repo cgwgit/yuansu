@@ -6,6 +6,8 @@
 		<meta name="Description" content="">
 		<meta http-equiv="X-UA-Compatible" content="IE=9" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+		<link rel="Bookmark" href="/Public/images/favicon.ico">
+       <link rel="Shortcut Icon" href="/Public/images/favicon.ico" />
 		<title>居元素后台管理系统</title>
 		<link type="text/css" rel="stylesheet" href="/Public/css/dailishang.css" />
 		<link rel="stylesheet" type="text/css" href="/Public/static/h-ui/css/H-ui.min.css" />

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>门店详情</title>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/Qian/css/reset.css">
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/Qian/css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/Qian/css/index.css" />
+		<link rel="stylesheet" href="__PUBLIC__/Qian/css/weui.css">
+		<link rel="stylesheet" href="__PUBLIC__/Qian/css/jquery-weui.css">
+
+		<!--<script type="text/javascript" src="__PUBLIC__/Qian/js/jquery-1.10.1.min.js"></script>-->
+
+	</head>
+
+	<body class="min-width">
+		<div class="storedetail ui-width-100">
+			<div class="store-top ui-width-100">
+				<h2>{$shopInfo['shop_name']}</h2>
+			</div>
+			<div class="store-message">
+				<div class="item-message mui-flex" onclick="location()">
+					<div class="cell fixed name" style="width: 60px;text-align:left;color: #828282;">
+						位置
+					</div>
+					<div class="cell">
+						{$shopInfo['shop_position']}
+					</div>
+					<div class="cell fixed">
+						<i class="icon iconfont" style="color: #828287;">&#xe640;</i>
+					</div>
+				</div>
+				<div class="store_detail_line">
+
+				</div>
+				<div class="item-message mui-flex">
+					<div class="cell fixed name" style="width: 60px;text-align:left;color: #828282;">
+						电话
+					</div>
+					<div class="cell">
+						{$shopInfo['shop_tel']}
+					</div>
+				</div>
+				<div class="store_detail_line">
+
+				</div>
+				<div id="imgSet" class="item-message mui-flex">
+					<div class="cell fixed name" style="width: 60px;text-align: left;	color: #828282;">
+						图集
+					</div>
+					<div class="imgLists cell">
+						<ul>
+						  <foreach name="Pics" item="v">
+								<li>
+									<img src="<?php echo substr($v['shop_pic'],1) ?>" class="ui-width-100 tuji" />
+								</li>
+							</foreach>
+						</ul>
+					</div>
+				</div>
+				<div class="decoration" style="height: 20px;">
+
+				</div>
+
+				<div class="item-message mui-flex">
+					<div class="cell fixed name" style="width: 60px;text-align:left;color: #828282;">
+						营业时间
+					</div>
+					<div class="cell">
+						{$shopInfo['shop_stime']}-{$shopInfo['shop_etime']}
+					</div>
+				</div>
+				<div class="store_detail_line">
+				</div>
+				<div class="item-message mui-flex">
+					<div class="cell fixed name" style="width: 60px;text-align:left;color: #828282;">
+						推荐
+					</div>
+					<div class="cell">
+						{$shopInfo['shop_tuijian']}
+					</div>
+				</div>
+				<div class="store_detail_line">
+
+				</div>
+				<div class="item-message mui-flex">
+					<div class="cell fixed name" style="width: 60px;text-align:left;color: #828282;">
+						特色
+					</div>
+					<div class="cell">
+						{$shopInfo['shop_tese']}
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<script src="__PUBLIC__/Qian/js/jquery-2.1.4.js"></script>
+		<script src="__PUBLIC__/Qian/js/fastclick.js"></script>
+		<script src="__PUBLIC__/Qian/js/jquery-weui.js"></script>
+		<script src="__PUBLIC__/Qian/js/swiper.js"></script>
+		<script>
+			var pb1 = $.photoBrowser({
+				items: [
+					"http://jqweui.com/dist/demos/__PUBLIC__/Qian/images/swiper-2.jpg",
+					"http://jqweui.com/dist/demos/__PUBLIC__/Qian/images/swiper-2.jpg",
+					"./__PUBLIC__/Qian/images/store_03.jpg"
+				],
+
+				onSlideChange: function(index) {
+					console.log(this, index);
+				},
+
+				onOpen: function() {
+					console.log("onOpen", this);
+				},
+				onClose: function() {
+					console.log("onClose", this);
+				}
+			});
+			$(".tuji").click(function() {
+				pb1.open();
+			});
+		</script>
+	</body>
+
+</html>

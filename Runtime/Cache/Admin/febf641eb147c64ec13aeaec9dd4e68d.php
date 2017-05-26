@@ -103,6 +103,14 @@
                             <p class="textarea-numberbar"></p>
                         </div>
                     </div>
+                    <div class="row cl mt-20 mb-20">
+                                <div class="aa">
+                                    <label class="form-label col-xs-4 col-sm-2">门店logo图:</label>
+                                    <div class="formControls col-xs-8 col-sm-9">
+                                        <input type="file" class="input-text" value="20" placeholder="" name="shop_logo">
+                                    </div>
+                                </div>
+                    </div>
                     <script type="text/javascript">
                         //增加相册<tr><td height="20" bgcolor="#FFFFFF" class="STYLE6"><div align="right"><span class="STYLE19" onclick="$(this).parent().parent().parent().remove()">[-]&nbsp;相册图片：</span></div></td><td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="left"><input type="file" name="pics_tu[]" /></div></td></tr>
                         function add_pics(){
@@ -239,6 +247,7 @@
                 focusCleanup:true,
                 success:"valid",
                 submitHandler:function(form){
+                    var index = layer.load(0, {shade: false});
                     $(form).ajaxSubmit({
                         type: 'post',
                         url: "/index.php/Admin/Shop/addShop",
@@ -250,6 +259,7 @@
                                         window.location.href="/index.php/Admin/Shop/shopList";
                                 });
                             }else if(data.code == 0){
+                                layer.close(index); 
                                 layer.msg(data.msg,{icon:2,time:1000});
                             }
                         }

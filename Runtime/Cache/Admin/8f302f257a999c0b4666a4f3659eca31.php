@@ -30,7 +30,7 @@
 
     <body>
         <div class="page-container">
-        <div style=" margin:auto;width:300px;height:300px;border:2px solid gray; margin-bottom:50px;" id="container"></div>
+        <div style=" margin:auto;width:700px;height:300px;border:2px solid gray; margin-bottom:50px;" id="container"></div>
             <article class="page-container pl-20 pr-20">
                 <form class="form form-horizontal" id="form-article-add" method="post" action="/index.php/Admin/Shop/editShop" enctype="multipart/form-data" onsubmit="return false">
                     <div class="row cl">
@@ -103,6 +103,16 @@
                             <textarea name="shop_Tese" cols="" rows="" class="textarea" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！"><?php echo ($shopinfo['shop_tese']); ?></textarea>
                             <p class="textarea-numberbar"></p>
                         </div>
+                    </div>
+                    <div class="row cl mt-20 mb-20">
+                                <div class="aa">
+                                    <label class="form-label col-xs-4 col-sm-2">门店logo图:</label>
+                                    <div class="formControls col-xs-8 col-sm-9">
+                                        <input type="file" class="input-text" value="20" placeholder="" name="shop_logo">
+                                        <input type="hidden" name="yuanshop_logo" value="<?php echo $shopinfo['shop_logo'] ?>"></input>
+                                        <img src="<?php echo (substr($shopinfo['shop_logo'],1)) ?>" width="80" height="80"/>
+                                    </div>
+                                </div>
                     </div>
                     <script type="text/javascript">
                         //增加相册<tr><td height="20" bgcolor="#FFFFFF" class="STYLE6"><div align="right"><span class="STYLE19" onclick="$(this).parent().parent().parent().remove()">[-]&nbsp;相册图片：</span></div></td><td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="left"><input type="file" name="pics_tu[]" /></div></td></tr>
@@ -266,6 +276,7 @@
                 focusCleanup:true,
                 success:"valid",
                 submitHandler:function(form){
+                    var index = layer.load(0, {shade: false});
                     $(form).ajaxSubmit({
                         type: 'post',
                         url: "/index.php/Admin/Shop/editShop",
@@ -277,6 +288,7 @@
                                         window.location.href="/index.php/Admin/Shop/shopList";
                                 });
                             }else if(data.code == 0){
+                                layer.close(index); 
                                 layer.msg(data.msg,{icon:2,time:1000});
                             }
                         }

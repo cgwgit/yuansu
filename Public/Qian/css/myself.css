@@ -1,0 +1,353 @@
+/*顶部*/
+
+#header {
+	width: 100%;
+	height: 138px;
+	background: url(../images/myself_bg_02.jpg) no-repeat;
+	background-size: 100%;
+	overflow: hidden;
+}
+
+#header ul.h_top {
+	width: 100%;
+	overflow: hidden;
+	padding: 29px 10px 15px 10px;
+	color: #fff;
+}
+
+#header ul.h_top li {
+	height: 70px;
+	line-height: 70px;
+}
+
+#header ul.h_top li.l1 {
+	width: 70px;
+	margin-right: 10px;
+}
+
+#header ul.h_top li.l1 img {
+	width: 100%;
+}
+
+#header ul.h_top li.l2 p {
+	height: 44%;
+	line-height: 44%;
+}
+
+#header ul.h_top li.l2 p.p1 {
+	font-size: 13px;
+}
+
+#header ul.h_top li.l2 p.p2 {
+	font-size: 12px;
+}
+
+#header ul.h_top li.l2 p.p2 i {
+	width: 13px;
+	margin-right: 5px;
+}
+
+#header ul.h_top li.l3 {
+	font-size: 12px;
+	margin-right: 23px;
+}
+
+#header ul.h_top li.l3 a {
+	color: #fff;
+}
+
+#header ul.h_top li.l3 i {
+	width: 6px;
+}
+
+#header ul.h_top li.l3 i img {
+	width: 100%;
+}
+
+.lt{
+	float: left;
+}
+.rt{
+	float: right;
+}
+
+/*我的订单*/
+
+#mine {
+	width: 100%;
+	background: #fff;
+}
+
+#mine ul {
+	width: 100%;
+	border-bottom: 1px solid #eee;
+	overflow: hidden;
+	height: 45px;
+	line-height: 45px;
+}
+
+li.ritpc a {
+	display: block;
+	width: 100%;
+	height: 45px;
+}
+
+li.litpc {
+	width: 22px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.litpc i{
+	color: #d81f06;
+	font-size: 24px;
+}
+li.litpc img {
+	width: 100%;
+}
+
+li.ritpc {
+	width: 86%;
+}
+
+li.ritpc p {
+	color: #333333;
+	font-size: 14px;
+	float: left;
+}
+
+li.ritpc i {
+	float: right;
+	width: 8px;
+	margin-right: 15px;
+}
+
+li.ritpc i img {
+	width: 100%;
+}
+
+#mine div {
+	width: 100%;
+	overflow: hidden;
+	border-bottom: 1px solid #eee;
+}
+
+#mine div a {
+	display: block;
+	width: 25%;
+	text-align: center;
+	height: 81px;
+	float: left;
+	font-size: 12px;
+}
+
+#mine div a .p1 {
+	margin-top: 15px;
+}
+
+#mine div a .p2 {
+	margin-top: 10px;
+}
+
+#mine div a p i {
+	width: 24px;
+}
+
+#mine div a p i img {
+	width: 100%;
+}
+.red_line{
+	width: 100%;
+	height: 2px;
+	background: #c30d23;
+	margin-top: 8px;
+	margin-bottom: 2px;
+	
+}
+.right_lq{
+	width: 100px;
+	float: right;
+	margin-right: 15px;
+	height: 35px;
+	line-height: 35px;
+	background: #c30d23;
+	border-radius: 5px;
+	overflow: hidden;
+	margin-top: 5px;
+	display: block;
+	text-align: center;
+	font-size: 14px;
+	color: #fff;
+}
+
+/*中间*/
+
+#mell {
+	width: 100%;
+	background: #fff;
+}
+
+#mell ul {
+	width: 100%;
+	overflow: hidden;
+	height: 45px;
+	line-height: 45px;
+	border-bottom: 1px solid #eee;
+}
+
+#mell ul li.litpc {
+	width: 22px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#mell>ul a {
+	display: inline-block;
+	width: 100%;
+	-webkit-tap-highlight-color: transparent;
+}
+
+
+/*中下*/
+
+#little {
+	width: 100%;
+	background: #fff;
+}
+
+#little ul {
+	width: 100%;
+	overflow: hidden;
+	height: 45px;
+	line-height: 45px;
+	border-bottom: 1px solid #eee;
+}
+
+#little ul li.litpc {
+	width: 22px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#little>ul a {
+	display: inline-block;
+	width: 100%;
+}
+
+.change_tjr {
+	width: 20px;
+	height: 15px;
+	background: #fff;
+	font-size: 13px;
+	color: #f9978f;
+	border-radius: 5px;
+	padding: 0 2px;
+}
+
+.inp_tjr {
+	background: none;
+	width: 80px;
+	font-size: 14px;
+	color: #fff;
+	height: 13px;
+	border: 1px solid #fff;
+}
+.exit_login{
+	width: 96%;
+	display: block;
+	margin: 0 auto;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 14px;
+	color: #fff;
+	background: #f54548;
+	border-radius: 5px;
+	margin-top: 20px;
+}
+.box_qrcode{
+	width: 90%;
+	display: block;
+	text-align: center;
+	font-size: 14px;
+	color: #333333;
+	position: absolute;
+	top: 25%;
+	left: 5%;
+}
+.box_qrcode img{
+	display: block;
+	margin: 0 auto;
+}
+#lw_about{
+	width:100%;
+	overflow: hidden;
+	text-align: center;
+	padding-top: 20px;
+}
+#lw_about .lw_title{
+	font-size: 18px;
+	font-weight: normal;
+	color: #000;
+	line-height: 80px;
+}
+#lw_about .lw_content{
+	text-align: left;
+	font-size: 13px;
+	color: #666666;
+	width: 94%;
+	margin: 0 auto;
+	text-indent: 2rem;
+	line-height: 20px;
+}
+#lw_about h5{
+	text-align: center;
+	font-size: 12px;
+	font-weight: normal;
+	color: #aaa;
+	width: 94%;
+	margin: 0 auto;
+	margin-top: 30%;
+	line-height: 20px;
+}
+.box_404{
+	padding-top: 40%;
+	display: block;
+	
+}
+.right_number{
+	margin-right: 15px;
+	color: #333;
+}
+.right_number label{
+	color: #f54548;
+	margin-right: 2px;
+}
+/*资料修改*/
+.jsd_photo{
+	width: 40px;
+	height: 40px;
+	display: block;
+	margin-top: 2.5px;
+	overflow: hidden;
+	border-radius: 5px;
+	float: right;
+}
+.jsd_content{
+	width: 100px;
+	height: 40px;
+	display: block;
+	margin-top: 2.5px;
+	overflow: hidden;
+	border-radius: 5px;
+	float: right;
+}
+.jsd_content input{
+	width: 100%;
+	line-height: 40px;
+	margin-top: 2.5px;
+	border: 0;
+	font-size: 14px;
+	color: #aaa;
+	text-align: right;
+}

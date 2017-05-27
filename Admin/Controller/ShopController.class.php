@@ -223,4 +223,11 @@ class ShopController extends Controller {
             
         }
     }
+    //门店收藏人数信息展示
+    public function shoucangList(){
+        $shop_id = $_GET['shop_id'];
+        $Info = M('shop_shoucang')->join('sp_user on sp_user.user_id=sp_shop_shoucang.user_id')->where(array('shop_id' => $shop_id))->select();
+        $this->assign('user', $Info);
+        $this->display();
+    }
  }

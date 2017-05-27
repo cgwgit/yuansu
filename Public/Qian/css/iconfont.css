@@ -1,10 +1,10 @@
 
 @font-face {font-family: "iconfont";
-  src: url('iconfont.eot?t=1495622923031'); /* IE9*/
-  src: url('iconfont.eot?t=1495622923031#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('iconfont.woff?t=1495622923031') format('woff'), /* chrome, firefox */
-  url('iconfont.ttf?t=1495622923031') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('iconfont.svg?t=1495622923031#iconfont') format('svg'); /* iOS 4.1- */
+  src: url('iconfont.eot?t=1495692010869'); /* IE9*/
+  src: url('iconfont.eot?t=1495692010869#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1495692010869') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1495692010869') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1495692010869#iconfont') format('svg'); /* iOS 4.1- */
 }
 
 .iconfont {
@@ -56,6 +56,8 @@
 .icon-shanchu1:before { content: "\e62a"; }
 
 .icon-fenlei:before { content: "\e604"; }
+
+.icon-dianpu1:before { content: "\e690"; }
 
 .icon-fanhui1:before { content: "\e605"; }
 
@@ -304,4 +306,6 @@
 .icon-FDSR:before { content: "\e681"; }
 
 .icon-dongtai:before { content: "\e682"; }
+
+.icon-chanpin-shoucang:before { content: "\e691"; }
 

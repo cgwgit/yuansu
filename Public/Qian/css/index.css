@@ -14,6 +14,7 @@
 	margin: 0 auto;
 	background: #fff;
 	font-size: 16px;
+	overflow: hidden;
 }
 
 .left-name {
@@ -141,6 +142,7 @@
 	width: 100%;
 	padding: 15px 0;
 	background: #fff;
+	position: relative;
 }
 
 .btn-md {
@@ -156,8 +158,13 @@
 	color: #fff;
 	text-align: center;
 }
-
-
+.love{
+	z-index: 999;
+}
+.love i{
+	font-size: 22px;
+	color: #c30d23;
+}
 /*slide*/
 
 .slideTxtBox {
@@ -253,9 +260,10 @@
 	line-height: 17px;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	display: block;
+	display: -webkit-box;
 	-webkit-line-clamp: 2;
 	margin-top: 6px;
+	/* display: block; */
 }
 
 
@@ -312,12 +320,6 @@
 	height: 100px;
 }
 
-/*.storelists .item-store .s-top .s-message {
-	-webkit-box-flex: 1;
-	-webkit-flex: auto;
-	flex: auto;
-	margin-left: 2%;
-}*/
 .storelists .item-store .s-top .s-message {
 	-webkit-box-flex: 1;
 	-webkit-flex: auto;
@@ -326,6 +328,7 @@
 	max-width: 70%;
 	overflow: hidden;
 }
+
 .storelists .item-store .s-top .s-message h4 {
 	font-size: 18px;
 	font-weight: normal;
@@ -473,7 +476,20 @@
 	width: 25%;
 	margin-right: 2%;
 }
-
+/*empty-store*/
+.empty-store{
+	width: 100%;
+	position: absolute;
+	top: 25%;
+	text-align: center;
+	color: #c5c5c5;
+	font-size: 16px;
+}
+.empty-store i{
+	font-size: 100px;
+	color: #c5c5c5;
+	line-height: 100px;
+}
 @media only screen and (max-width: 320px) {
 	.slideTxtBox .bd .right {
 		float: left;

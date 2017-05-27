@@ -86,8 +86,49 @@ class WechatModel extends Model {
     }
     return $ticket;
   }
+    //获取用户的openid
+    public function openId(){
+    	$url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; 
+	        if (!isset($_GET['code'])) {
+	        	//获取组装的url
+	            $openidUrl = $this->snsapi_base($url);
+	            redirect($openidUrl);
+	        }else{
+	            $openidAccess_token = $this->openidAccess_token($_GET['code']);
+	            return $openidAccess_token;
+	        }
+    }
+     //获取微信用户的opnid
+    public function getOpenId($openid,$access_token)
+	    {
+	        $userInfo = $this->getUserInfo($openid,$access_token);
+	         return $userInfo;
+	    }
 
+     public function snsapi_base($redirect_uri, $scope = "snsapi_userinfo", $state = 0)
+	    {
+	        $appId = $this->appid;
+	        $url = "https://open.weixin.qq.com/connect/oauth2/authorize";
+	        $url .= "?appid=$appId";
+	        $url .= "&redirect_uri=http://$redirect_uri";
+	        $url .= "&response_type=code";
+	        $url .= "&scope=$scope";
+	        $url .= "&state=$state#wechat_redirect";
+	        return $url;
+	    }
+
+	public function openidAccess_token($code){
+        $appId = $this->appid;
+        $appSecret= $this->appsecret;
+        $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=$appId&secret=$appSecret&code=$code&grant_type=authorization_code";
+        return json_decode($this->httpGet($url),true);
+    }
+    //获取用户信息
+    public function getUserInfo($openid, $access_token){
+    	 $url = "https://api.weixin.qq.com/sns/userinfo?access_token=$access_token&openid=$openid&lang=zh_CN ";
+        return json_decode($this->httpGet($url),true);
       //请求
+    }
 	private function httpGet($url) {
 	    $curl = curl_init();
 	    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);

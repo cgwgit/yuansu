@@ -21,24 +21,24 @@
 <script type="text/javascript" src="/Public/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>会员员列表</title>
+<title>收藏人员信息列表</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 会员员管理 <span class="c-gray en">&gt;</span> 会员列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 门店管理 <span class="c-gray en">&gt;</span> 人员信息列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
 	<table class="table table-border table-bordered table-bg">
 		<thead>
 			<tr>
-				<th scope="col" colspan="9">会员列表</th>
+				<th scope="col" colspan="9">收藏人员列表</th>
 			</tr>
 			<tr class="text-c">
 				<th width="40">ID</th>
-				<th width="150">会员昵称</th>
-				<th width="150">会员手机号</th>
-				<th width="130">会员头像</th>
-				<th width="130">会员关注时间</th>
+				<th width="150">用户昵称</th>
+				<th width="150">用户手机号</th>
+				<th width="130">用户头像</th>
+				<th width="130">用户所在城市</th>
+				<th width="130">用户关注时间</th>
 				<th width="130">操作</th>
-				</if>
 			</tr>
 		</thead>
 		<tbody>
@@ -47,6 +47,7 @@
 				<td><?php echo $v['user_name'] ?></td>
 				<td><?php echo $v['user_tel'] ?></td>
 				<td><img width="40" height="40" src="<?php echo $v['user_img'] ?>"></td>
+				<td><?php echo $v['province'] ?>省<?php echo $v['city'] ?>市</td>
 				<td><?php echo date('Y-m-d H:i:s', $v['user_register_time']) ?></td>
 				<td class="td-manage">
 							<a title="删除" href="javascript:;" onclick="activity_del(this,'<?php echo $v['user_id'] ?>')" class="ml-10" style="text-decoration:none">
@@ -86,7 +87,7 @@ function activity_del(obj, id) {
 	layer.confirm('确认要删除吗？', function(index) {
 		$.ajax({
 			type: 'get',
-			url: '/index.php/Admin/User/member_del/',
+			url: '/index.php/Admin/Shop/member_del/',
 			data:{'id':id},
 			dataType: 'json',
 			success: function(data) {

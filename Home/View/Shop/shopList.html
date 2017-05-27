@@ -118,7 +118,8 @@
                                     $("#list").append('<div class="item-store"> <a class="s-top ui-width-100 ui-flex" href="__CONTROLLER__/shopDetail/shop_id/'+el.shop_id+'"> <img src="'+el.shop_logo.substring(1)+'" class="s-img"/> <div class="s-message"> <h4>'+el.shop_name+'</h4> <div class="s-address">'+el.shop_position+'</div> </div> </a> <div class="s-bottom-block ui-width-100"> <ul> <li class="br"> <a href="tel:'+el.shop_tel+'" class="db-block"> <i class="icon iconfont">&#xe624;</i>'+el.shop_tel+'</a> </li> <li> <a href="http://api.map.baidu.com/direction?origin=latlng:36.09297,120.3743|name:我的位置&destination=山东省青岛市利群宇恒大厦&mode=driving&output=html&src=yourCompanyName|yourAppName" class="db-block"> <i class="icon iconfont">&#xe66c;</i> 一键导航</a> </li> </ul> </div> </div>');
                                });  
                     }else{
-	         	      alert("您搜索的城市商店不存在");
+	         	      $(".item-store").remove();
+	         	      $("#list").append('<div class="empty-store"> <i class="icon iconfont">&#xe690;</i> <div class="word"> 暂时还没有店铺哦~ </div> </div>');
 	              }
 				},
 			})
@@ -137,7 +138,8 @@
                             $("#list").append('<div class="item-store"> <a class="s-top ui-width-100 ui-flex" href="__CONTROLLER__/shopDetail/shop_id/'+el.shop_id+'"> <img src="'+el.shop_logo.substring(1)+'" class="s-img"/> <div class="s-message"> <h4>'+el.shop_name+'</h4> <div class="s-address">'+el.shop_position+'</div> </div> </a> <div class="s-bottom-block ui-width-100"> <ul> <li class="br"> <a href="tel:'+el.shop_tel+'" class="db-block"> <i class="icon iconfont">&#xe624;</i>'+el.shop_tel+'</a> </li> <li> <a href="http://api.map.baidu.com/direction?origin=latlng:36.09297,120.3743|name:我的位置&destination=山东省青岛市利群宇恒大厦&mode=driving&output=html&src=yourCompanyName|yourAppName" class="db-block"> <i class="icon iconfont">&#xe66c;</i> 一键导航</a> </li> </ul> </div> </div>');
                         });  
                     }else{
-	         	      alert("您搜索的城市商店不存在");
+                     $(".item-store").remove();
+	         	      $("#list").append('<div class="empty-store"> <i class="icon iconfont">&#xe690;</i> <div class="word"> 暂时还没有店铺哦~ </div> </div>');
 	            	}
 				}
 			

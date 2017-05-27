@@ -44,6 +44,7 @@
 							<th width="120">门店特色</th>
 							<th width="120">营业时间</th>
 							<th width="180">门店电话</th>
+							<th width="180">收藏人数</th>
 							<th width="180">添加时间</th>
 							<th width="180">修改时间</th>
 							<th width="180">操作</th>
@@ -60,6 +61,7 @@
 							<td><?php echo $v['shop_tese'] ?></td>
 							<td><?php echo $v['shop_stime'] ?>--<?php echo $v['shop_etime'] ?></td>
 							<td><?php echo $v['shop_tel'] ?></td>
+							<td><u style="cursor:pointer" class="text-primary" onClick="article_list('查看','__CONTROLLER__/shoucangList/shop_id/<?php echo $v['shop_id'] ?>','800','500')" title="查看"><?php echo $v['shop_shoucang'] ?>人</u></td>
 							<td><?php echo date('Y-m-d H:i:s', $v['shop_addtime']) ?></td>
 							<td><?php echo date('Y-m-d H:i:s', $v['shop_uptime']) ?></td>
 							<td class="td-manage">
@@ -100,7 +102,7 @@
 			function article_add(title, url, w, h) {
 				layer_show(title, url, w, h);
 			}
-			/*商品-查看*/
+			/*商品-收藏人数*/
 			function article_list(title, url, w, h) {
 				layer_show(title, url, w, h);
 			}

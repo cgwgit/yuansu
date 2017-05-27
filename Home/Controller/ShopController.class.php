@@ -12,10 +12,9 @@ class ShopController extends Controller {
 	    	// 5公里范围是5000
 	    	$longitude = $post['longitude'];//经度信息
 	    	$latitude = $post['latitude'];//纬度信息
-	    	// $sql = "select * from (select shop_id,shop_name,shop_tel,shop_position,  ROUND(6378.138*2*ASIN(SQRT(POW(SIN(($latitude*PI()/180-`shop_wei`*PI()/180)/2),2)+COS($latitude*PI()/180)*COS(`shop_wei`*PI()/180)*POW(SIN(($longitude*PI()/180-`shop_jing`*PI()/180)/2),2)))*1000) AS distance from sp_shop order by distance ) as a where a.distance<=5000";
+	    	// $sql = "select * from (select shop_id,shop_name,shop_tel,shop_position,shop_logo,  ROUND(6378.138*2*ASIN(SQRT(POW(SIN(($latitude*PI()/180-`shop_wei`*PI()/180)/2),2)+COS($latitude*PI()/180)*COS(`shop_wei`*PI()/180)*POW(SIN(($longitude*PI()/180-`shop_jing`*PI()/180)/2),2)))*1000) AS distance from sp_shop order by distance ) as a where a.distance<=5000";
 	    	$sql = "select * from (select shop_id,shop_name,shop_tel,shop_position,shop_logo, ROUND(6378.138*2*ASIN(SQRT(POW(SIN((36.09297*PI()/180-`shop_wei`*PI()/180)/2),2)+COS(36.09297*PI()/180)*COS(`shop_wei`*PI()/180)*POW(SIN((120.3743*PI()/180-`shop_jing`*PI()/180)/2),2)))*1000) AS distance from sp_shop order by distance ) as a where a.distance<=5000";
 	    	$shopInfo = M()->query($sql);
-
 	    	echo json_encode($shopInfo);exit;
     	}else{
 	        $jssdk = new \Home\Model\WechatModel();
@@ -48,7 +47,30 @@ class ShopController extends Controller {
 
     public function daohang(){
     	$shopInfo = M('shop')->where(array('shop_id' => $_GET['shop_id']))->find();
+        header('Access-Control-Allow-Origin:*');
+        $str = $shopInfo['shop_position'];
+        $reg = '/省(.+)市/U';
+        preg_match_all($reg, $str, $result);
+        $shopInfo['shop_position'] = $result[1][0]."市";
     	$this->assign('shopInfo', $shopInfo);
     	$this->display();
+    }
+    // 门店收藏
+    public function shop_ShouCang(){
+        $post = I('post.');
+        $rst = M('shop_shoucang')->add($post);
+        M('shop')->where(array('shop_id' => $post['shop_id']))->setInc('shop_shoucang',1);
+        if($rst){
+            echo json_encode(array('code' =>1,'msg' => '门店收藏成功' ));exit;
+        }
+    }
+    // 取消门店收藏
+    public function shop_QShouCang(){
+         $post = I('post.');
+         $rst = M('shop_shoucang')->where($post)->delete();
+         M('shop')->where(array('shop_id' => $post['shop_id']))->setDec('shop_shoucang',1);
+         if($rst !== false){
+            echo json_encode(array('code' =>1,'msg' => '取消门店收藏' ));exit;
+         }
     }
 }

@@ -39,7 +39,7 @@
 					<div class="cell fixed name" style="width: 60px;text-align:left;color: #828282;">
 						电话
 					</div>
-					<div class="cell">
+					<div class="cell" style="color:black;">
 						<?php echo ($shopInfo['shop_tel']); ?>
 					</div>
 				</div>
@@ -56,6 +56,16 @@
 									<img src="<?php echo substr($v['shop_pic'],1) ?>" class="ui-width-100 tuji" />
 								</li><?php endforeach; endif; ?>
 						</ul>
+					</div>
+				</div>
+				<div class="store_detail_line">
+				</div>
+				<div class="item-message mui-flex" id="collection" state="on">
+					<div class="cell fixed name" style="width: 60px;text-align:left;color: #828282;">
+						收藏门店
+					</div>
+					<div class="cell shoucang" style="margin-left: 250px;">
+						<i class="icon iconfont" style="color: #BFBDBD;font-size: 14px;vertical-align: top;">&#xe65d;</i>
 					</div>
 				</div>
 				<div class="decoration" style="height: 20px;">
@@ -98,14 +108,12 @@
 		<script src="/Public/Qian/js/fastclick.js"></script>
 		<script src="/Public/Qian/js/jquery-weui.js"></script>
 		<script src="/Public/Qian/js/swiper.js"></script>
+		<script type="text/javascript" src="/Public/Qian/layer_mobile/layer.js"></script>
 		<script>
 			var pb1 = $.photoBrowser({
 				items: [
-					"http://jqweui.com/dist/demos//Public/Qian/images/swiper-2.jpg",
-					"http://jqweui.com/dist/demos//Public/Qian/images/swiper-2.jpg",
-					".//Public/Qian/images/store_03.jpg"
+				    <?php if(is_array($Pics)): foreach($Pics as $key=>$v): ?>"<?php echo substr($v['shop_pic'],1) ?>",<?php endforeach; endif; ?>
 				],
-
 				onSlideChange: function(index) {
 					console.log(this, index);
 				},
@@ -120,6 +128,52 @@
 			$(".tuji").click(function() {
 				pb1.open();
 			});
+			//收藏
+			$(function(){
+				$("#collection").click(function(){
+                    var state = this.getAttribute("state");
+					if(state === "on"){
+						$.ajax({
+							url: '/index.php/Home/Shop/shop_ShouCang',
+							type: 'post',
+							dataType: 'json',
+							data: {user_id: "<?php echo session('user_id') ?>",shop_id:'<?php echo ($shopInfo['shop_id']); ?>'},
+							success:function(data){
+								if(data.code == 1){
+									layer.open({
+									    content: data.msg
+									    ,skin: 'msg'
+									    ,time: 1, //2秒后自动关闭
+								     });
+								    $(".shoucang i").css('color','#c30d23'); 
+									$("#collection").attr("state", "off");
+								}
+							}
+						})	
+					}else{
+						$.ajax({
+							url: '/index.php/Home/Shop/shop_QShouCang',
+							type: 'post',
+							dataType: 'json',
+							data: {user_id: "<?php echo session('user_id') ?>",shop_id:'<?php echo ($shopInfo['shop_id']); ?>'},
+							success:function(data){
+								if(data.code == 1){
+									layer.open({
+									    content: data.msg
+									    ,skin: 'msg'
+									    ,time: 1 //2秒后自动关闭
+									});
+								    $(".shoucang i").css('color','#BFBDBD'); 
+									$("#collection").attr("state", "on");
+								}
+							}
+						})
+					}
+						//提示
+					  
+				})
+				
+			})
 		</script>
 	</body>
 

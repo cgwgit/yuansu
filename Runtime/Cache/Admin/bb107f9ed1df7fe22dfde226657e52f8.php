@@ -49,6 +49,7 @@
 							<th width="120">产品颜色</th>
 							<th width="180">产品特点</th>
 							<th width="180">产品logo</th>
+							<th width="180">收藏人数</th>
 							<th width="180">添加时间</th>
 							<th width="180">修改时间</th>
 							<th width="180">操作</th>
@@ -63,6 +64,7 @@
 							<td><?php echo $v['goods_color'] ?></td>
 							<td><?php echo $v['goods_tedian'] ?></td>
 							<td><img src = "<?php echo substr($v['goods_logo'],1)?>" width="50" height = "50"></td>
+							<td><?php echo $v['goods_shoucang'] ?>人</td>
 							<td><?php echo date('Y-m-d H:i:s', $v['goods_addtime']) ?></td>
 							<td><?php echo date('Y-m-d H:i:s', $v['goods_uptime']) ?></td>
 							<td class="td-manage">

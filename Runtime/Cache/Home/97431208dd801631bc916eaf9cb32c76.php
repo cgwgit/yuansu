@@ -26,21 +26,10 @@
 						位置
 					</div>
 					<div class="cell">
-						<?php echo ($shopInfo['shop_position']); ?>
+						<a style="color:black;" href="/index.php/Home/Shop/daohang/shop_id/<?php echo ($shopInfo['shop_id']); ?>" class="db-block"><?php echo ($shopInfo['shop_position']); ?></a>
 					</div>
 					<div class="cell fixed">
 						<i class="icon iconfont" style="color: #828287;">&#xe640;</i>
-					</div>
-				</div>
-				<div class="store_detail_line">
-
-				</div>
-				<div class="item-message mui-flex">
-					<div class="cell fixed name" style="width: 60px;text-align:left;color: #828282;">
-						电话
-					</div>
-					<div class="cell" style="color:black;">
-						<?php echo ($shopInfo['shop_tel']); ?>
 					</div>
 				</div>
 				<div class="store_detail_line">
@@ -60,12 +49,12 @@
 				</div>
 				<div class="store_detail_line">
 				</div>
-				<div class="item-message mui-flex" id="collection" state="on">
+				<div class="item-message mui-flex" id="collection" <?php if(empty($rst)): ?>state="on"<?php else: ?> state="off"<?php endif; ?>>
 					<div class="cell fixed name" style="width: 60px;text-align:left;color: #828282;">
 						收藏门店
 					</div>
-					<div class="cell shoucang" style="margin-left: 250px;">
-						<i class="icon iconfont" style="color: #BFBDBD;font-size: 14px;vertical-align: top;">&#xe65d;</i>
+					<div class="cell shoucang">
+						<i class="icon iconfont" style="color: <?php if(empty($rst)): ?>#BFBDBD<?php else: ?>#c30d23<?php endif; ?>;font-size: 14px;vertical-align: top;">&#xe65d;</i>
 					</div>
 				</div>
 				<div class="decoration" style="height: 20px;">
@@ -128,8 +117,11 @@
 			$(".tuji").click(function() {
 				pb1.open();
 			});
-			//收藏
 			$(function(){
+				//获取图片宽度等于高度
+				var imgWidth = $(".tuji").width();
+				$(".tuji").height(imgWidth);
+				//收藏
 				$("#collection").click(function(){
                     var state = this.getAttribute("state");
 					if(state === "on"){
@@ -151,6 +143,7 @@
 							}
 						})	
 					}else{
+						//取消收藏
 						$.ajax({
 							url: '/index.php/Home/Shop/shop_QShouCang',
 							type: 'post',

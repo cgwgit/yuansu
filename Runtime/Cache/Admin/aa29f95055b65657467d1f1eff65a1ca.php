@@ -79,7 +79,7 @@
                        <label class="col-xs-4 col-sm-2 text-r">门店展示图：</label>
                        <div class="col-xs-8 col-sm-9">
                             <div id="default">
-                              <?php if(is_array($shop_pic)): foreach($shop_pic as $key=>$v): ?><img class = "pics_<?php echo ($v["id"]); ?>" width="80px" height="80px" src="<?php echo substr($v['shop_pic'],1) ?>"><?php endforeach; endif; ?>
+                              <?php if(is_array($shop_pic)): foreach($shop_pic as $key=>$v): ?><img class = "pics_<?php echo ($v["id"]); ?> mr-10" width="80px" height="80px" src="<?php echo substr($v['shop_pic'],1) ?>"><?php endforeach; endif; ?>
                             </div>
                        </div>
                     </div>

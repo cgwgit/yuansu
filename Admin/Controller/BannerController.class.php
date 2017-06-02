@@ -27,6 +27,7 @@ class BannerController extends Controller {
          $data = array(
              'banner_pic' => $pic,
              'banner_name' => $banner['banner_Name'],
+             'bannerdizhi' =>  $banner['banner_url'],
              'banner_addtime' => time(),
              'banner_uptime' => time()
           );
@@ -49,6 +50,7 @@ class BannerController extends Controller {
              'id' => $banner['id'],
              'banner_pic' => $pic,
              'banner_name' => $banner['banner_Name'],
+             'bannerdizhi' => $banner['banner_url'],
              'banner_uptime' => time()
           );
         $rst = M('banner')->save($data);
@@ -65,7 +67,13 @@ class BannerController extends Controller {
      }
 
      public function delBanner(){
-       $this->display();
+       $banner_id = $_GET['aid'];
+       $banner = M('banner')->where(array('id' => $banner_id))->find();
+       unlink($banner['banner_pic']);
+       $rst = M('banner')->where(array('id' => $banner_id))->delete();
+       if($rst){
+        echo json_encode(array('code' => 1,'msg' => 'banner删除成功'));exit;
+       }
      }
 
         //参数：$data是引用传递,在内部对其进行修改，在外边仍然可以访问到

@@ -39,9 +39,16 @@
                 </div>
             </div>
             <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2">链接地址：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <input type="text" class="input-text"  name="banner_url">
+                </div>
+            </div>
+            <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-2">banner图片：</label>
                 <div class="formControls col-xs-8 col-sm-9">
                     <input type="file" class="input-text" value="20" placeholder="" name="banner_Pic">
+                    图片尺寸：(750*300px)
                 </div>
             </div>
             <div class="row cl">

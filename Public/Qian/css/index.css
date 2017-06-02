@@ -144,9 +144,20 @@
 	background: #fff;
 	position: relative;
 }
-
+.btn_qwmd{
+	width: 225px;
+	display: block;
+	margin: 0 auto;
+	height: 36px;
+	line-height: 36px;
+	text-align: center;
+	font-size: 14px;
+	color: #fff;
+	background: url(../images/btn_qwmd2_03.png) center top no-repeat;
+	background-size: 100% auto;
+}
 .btn-md {
-	width: 76%;
+	width: 86%;
 	height: 45px;
 	line-height: 45px;
 	background: #c30d23;
@@ -362,12 +373,13 @@
 
 .storelists .item-store .s-bottom-block ul {
 	padding: 0 2%;
+	text-align: center;
 }
 
 .storelists .item-store .s-bottom-block ul li {
-	float: left;
-	width: 45%;
-	padding-left: 5%;
+	/* float: left; */
+	/* width: 40%; */
+	/* padding-left: 30%; */
 }
 
 .storelists .item-store .s-bottom-block ul li.br {
@@ -476,6 +488,9 @@
 	width: 25%;
 	margin-right: 2%;
 }
+.tuji{
+	margin-bottom: 5%;
+}
 /*empty-store*/
 .empty-store{
 	width: 100%;
@@ -489,6 +504,23 @@
 	font-size: 100px;
 	color: #c5c5c5;
 	line-height: 100px;
+}
+/*产品列表-收藏模块*/
+.box_collection{
+	width: 94%;
+	padding: 0 3%;
+	height: 40px;
+	line-height: 40px;
+	overflow: hidden;
+	background: #fff;
+	color: #252525;
+	font-size: 14px;
+	
+}
+.box_collection .left i{
+	color: #d81f07;
+	vertical-align: middle;
+	margin-left: 5px;
 }
 @media only screen and (max-width: 320px) {
 	.slideTxtBox .bd .right {

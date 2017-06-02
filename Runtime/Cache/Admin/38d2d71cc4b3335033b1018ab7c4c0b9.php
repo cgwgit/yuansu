@@ -8,8 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <link rel="Bookmark" href="/favicon.ico">
-    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <link rel="Bookmark" href="/Public/images/favicon.ico">
+    <link rel="Shortcut Icon" href="/Public/images/favicon.ico" />
     <!--[if lt IE 9]>
 <script type="text/javascript" src="/Public/lib/html5shiv.js"></script>
 <script type="text/javascript" src="/Public/lib/respond.min.js"></script>
@@ -39,11 +39,17 @@
                 </div>
             </div>
             <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2">banner链接地址：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <input type="text" class="input-text"  value="<?php echo ($banner['bannerdizhi']); ?>" name="banner_url">
+                </div>
+            </div>
+            <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-2">banner图片：</label>
                 <div class="formControls col-xs-8 col-sm-9">
                     <input type="file" class="input-text" value="20" placeholder="" name="banner_Pic">
+                    图片尺寸：(750*300px)
                     <img src="<?php echo (substr($banner['banner_pic'],1)) ?>" width="50" height="50"/>
-                    可以通过再次上传图片，替换已有图片
                      <input type="hidden" name="yuanpic" value="<?php echo $banner['banner_pic'] ?>"></input>
                 <input type="hidden" name="id" value="<?php echo $banner['id'] ?>"></input>
                 </div>

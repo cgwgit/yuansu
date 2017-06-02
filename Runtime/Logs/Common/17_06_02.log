@@ -1,0 +1,36 @@
+[ 2017-06-02T10:44:32+08:00 ] 192.168.20.14 /index.php/el.goods_logo+
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000457s ]
+ERR: 无法加载模块:El.goods_logo+
+
+[ 2017-06-02T15:17:14+08:00 ] 192.168.20.14 /index.php/My
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000035s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000880s ]
+ERR: 无法加载模块:My
+
+[ 2017-06-02T15:27:07+08:00 ] 192.168.20.14 /index.php/My
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000382s ]
+ERR: 无法加载模块:My
+
+[ 2017-06-02T17:54:17+08:00 ] 192.168.20.14 /index.php/index.php/Home/My/index.html.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000276s ]
+ERR: 无法加载模块:Index.php
+
+[ 2017-06-02T17:55:15+08:00 ] 192.168.20.14 /index.php/index.php/Home/My/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000518s ]
+ERR: 无法加载模块:Index.php
+
+[ 2017-06-02T17:55:18+08:00 ] 192.168.20.14 /index.php/index.php/Home/My
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000017s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000453s ]
+ERR: 无法加载模块:Index.php
+

@@ -17,6 +17,36 @@
 		<link rel="stylesheet" type="text/css" href="/Public/static/h-ui.admin/skin/default/skin.css" id="skin" />
 		<link rel="stylesheet" type="text/css" href="/Public/static/h-ui.admin/css/style.css" />
 		<link rel="stylesheet" type="text/css" href="/Public/css/page.css" />
+		<script type="text/javascript">
+			var catinfo = new Array();//声明一个缓存变量，存储获得出来的分类信息
+			  //根据当前分类 自动关联获取次级分类信息
+			  function show_catinfo(obj,mark){
+			    var cat_ida = $(obj).val(); //获得当前分类的id信息
+			    if(typeof catinfo[cat_ida] === 'undefined'){
+			      //通过ajax获取次级分类信息
+			      $.ajax({
+			        url:"/index.php/Admin/Category/getCatInfoB",
+			        data:{'cat_ida':cat_ida},
+			        dataType:'json',
+			        async:false,
+			        type:'get',
+			        success:function(msg){
+			          //console.log(msg);[Object { cat_id="5", cat_name="电子书"}, Object { cat_id="6", cat_name="数字音乐"}, Object { cat_id="7", cat_name="音像"}]
+			          //遍历msg，使得数据 与 html代码结合并追加给页面
+			          //m为键，n为遍历到的dom对象
+			          var s = "";
+			          $.each(msg,function(m,n){
+			            s += '<option value="'+n.cat_id+'">'+n.cat_name+'</option>';
+			          });
+
+			          catinfo[cat_ida] = s; //缓存请求过的分类信息
+			        }
+			      });
+			    }
+			    $('#cat_id'+mark+' option:not(:first)').remove(); //删除旧的
+			    $('#cat_id'+mark).append(catinfo[cat_ida]); //追加新的
+			  }
+</script> 
 		<!--[if IE 6]>
 <script type="text/javascript" src="/Public/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
@@ -29,10 +59,30 @@
 				<i class="Hui-iconfont">&#xe68f;</i></a>
 		</nav>
 		<div class="page-container">
-<!-- 			<div class="text-c">
-				<input type="text" name="" id="" placeholder="产品标题" style="width:250px" class="input-text">
-				<button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜商品</button>
-			</div> -->
+        <form method="post" id="myFormId" action="/index.php/Admin/Goods/showList">
+			<div class="text-c">
+				产品品名：<input type="text" name="goods_name" placeholder="请输入产品品名" style="width:150px" class="input-text">
+				产品分类：<span class="select-box"style=" width:150px;height: 31px">
+						<select name="category" class="select" id="cat_idA" onchange="show_catinfo(this,'B')">
+						    <option value="0">请选择产品分类</option>
+							<?php if(is_array($categorys)): foreach($categorys as $key=>$v): ?><option value="<?php echo $v['cat_id'] ?>"><?php echo $v['cat_name'] ?></option><?php endforeach; endif; ?>
+						</select>
+						</span>
+				所属系列：<span class="select-box"style=" width:150px;height: 31px">
+						    <select name="cat_id" id="cat_idB" class="select">
+								<option value='0'>-请选择-</option>
+						    </select>
+						</span>
+				首页展示：<span class="select-box"style=" width:150px;height: 31px">
+						    <select name="status" class="select">
+						        <option value=''>请选择</option>
+								<option value='0'>否</option>
+								<option value='1'>是</option>
+						    </select>
+						</span>
+				<button name="" id="tijiao" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+			</div>
+		</form>
 			<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" id="btndel" class="btn btn-danger radius" onclick="activity_dels(this)">
 				<i class="Hui-iconfont" id="btndel">&#xe6e2;</i> 批量删除</a>
 				<!-- <a class="btn btn-primary radius" onclick="article_add('添加商品','/index.php/Admin/Goods/addAction/','800','500')" href="javascript:;">
@@ -44,11 +94,11 @@
 						<tr class="text-c">
 							<th width="25"></th>
 							<th width="80">ID</th>
+							<th width="180">产品logo</th>
 							<th width="120">产品品名</th>
 							<th width="120">产品容积</th>
 							<th width="120">产品颜色</th>
 							<th width="180">产品特点</th>
-							<th width="180">产品logo</th>
 							<th width="180">收藏人数</th>
 							<th width="180">添加时间</th>
 							<th width="180">修改时间</th>
@@ -59,12 +109,12 @@
 					<?php if(is_array($goods)): foreach($goods as $key=>$v): ?><tr class="text-c">
 							<td><input type="checkbox" id="aid" name="huodong" value="<?php echo $v['goods_id'] ?>" /></td>
 							<td><?php echo $v['goods_id'] ?></td>
+							<td><img src = "<?php echo substr($v['goods_logo'],1)?>" width="50" height = "50"></td>
 							<td><?php echo $v['goods_name'] ?></td>
 							<td><?php echo $v['goods_rongji'] ?></td>
 							<td><?php echo $v['goods_color'] ?></td>
 							<td><?php echo $v['goods_tedian'] ?></td>
-							<td><img src = "<?php echo substr($v['goods_logo'],1)?>" width="50" height = "50"></td>
-							<td><?php echo $v['goods_shoucang'] ?>人</td>
+							<td><u style="cursor:pointer" class="text-primary" onClick="article_list('查看','/index.php/Admin/Goods/goods_shoucangList/goods_id/<?php echo $v['goods_id'] ?>','800','500')" title="查看"><?php echo $v['goods_shoucang'] ?>人</u></td>
 							<td><?php echo date('Y-m-d H:i:s', $v['goods_addtime']) ?></td>
 							<td><?php echo date('Y-m-d H:i:s', $v['goods_uptime']) ?></td>
 							<td class="td-manage">

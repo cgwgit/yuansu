@@ -39,9 +39,16 @@
                 </div>
             </div>
             <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2">banner链接地址：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <input type="text" class="input-text"  value="{$banner['bannerdizhi']}" name="banner_url">
+                </div>
+            </div>
+            <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-2">banner图片：</label>
                 <div class="formControls col-xs-8 col-sm-9">
                     <input type="file" class="input-text" value="20" placeholder="" name="banner_Pic">
+                    图片尺寸：(750*300px)
                     <img src="<?php echo (substr($banner['banner_pic'],1)) ?>" width="50" height="50"/>
                      <input type="hidden" name="yuanpic" value="<?php echo $banner['banner_pic'] ?>"></input>
                 <input type="hidden" name="id" value="<?php echo $banner['id'] ?>"></input>

@@ -62,7 +62,7 @@
 					</dd>
 				</dl>
 					<dl id="menu-admin">
-					<dt><i class="Hui-iconfont">&#xe62d;</i> 会员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+					<dt><i class="Hui-iconfont">&#xe62c;</i> 会员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 					<dd>
 						<ul>
 							<li>
@@ -72,7 +72,7 @@
 					</dd>
 				</dl>
 				<dl id="menu-article">
-					<dt><i class="Hui-iconfont">&#xe616;</i> 产品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+					<dt><i class="Hui-iconfont">&#xe620;</i> 产品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 					<dd>
 						<ul>
 							<li>
@@ -85,7 +85,7 @@
 					</dd>
 				</dl>
 				<dl id="menu-article">
-					<dt><i class="Hui-iconfont">&#xe616;</i> 门店管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+					<dt><i class="Hui-iconfont">&#xe66a;</i> 门店管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 					<dd>
 						<ul>
 							<li>
@@ -98,7 +98,7 @@
 					</dd>
 				</dl>
 				<dl id="menu-article">
-					<dt><i class="Hui-iconfont">&#xe616;</i> 订单管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+					<dt><i class="Hui-iconfont">&#xe687;</i> 订单管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 					<dd>
 						<ul>
 							<li>
@@ -108,7 +108,7 @@
 					</dd>
 				</dl>
 				<dl id="menu-article">
-					<dt><i class="Hui-iconfont">&#xe616;</i> 产品分类管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+					<dt><i class="Hui-iconfont">&#xe681;</i> 产品分类管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 					<dd>
 						<ul>
 							<li>
@@ -121,7 +121,7 @@
 					</dd>
 				</dl>
 					<dl id="menu-article">
-					<dt><i class="Hui-iconfont">&#xe616;</i> banner管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+					<dt><i class="Hui-iconfont">&#xe613;</i> banner管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 					<dd>
 						<ul>
 							<li>
@@ -132,7 +132,20 @@
 							</li>
 						</ul>
 					</dd>
-				</dl>	
+				</dl>
+				<dl id="menu-article">
+					<dt><i class="Hui-iconfont">&#xe613;</i> 新品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+					<dd>
+						<ul>
+							<li>
+								<a data-href="/index.php/Admin/XinPin/showList" data-title="新品列表" href="javascript:void(0);">新品列表</a>
+							</li>
+							<li>
+								<a data-href="/index.php/Admin/XinPin/addXinPin/id/1" data-title="添加新品" href="javascript:void(0);">添加新品</a>
+							</li>
+						</ul>
+					</dd>
+				</dl>		
 			</div>
 		</aside>
 		<div class="dislpayArrow hidden-xs">

@@ -5,8 +5,7 @@
 		<meta charset="UTF-8">
 		<title>产品专区</title>
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, user-scalable=no">
-		<link rel="stylesheet" type="text/css" href="/Public/Qian/css/
-reset.css">
+		<link rel="stylesheet" type="text/css" href="/Public/Qian/css/reset.css">
 		<link rel="stylesheet" type="text/css" href="/Public/Qian/css/iconfont.css">
 		<link rel="stylesheet" type="text/css" href="/Public/Qian/css/index.css">
 		<link rel="stylesheet" type="text/css" href="/Public/Qian/css/swiper.min.css" />
@@ -16,16 +15,32 @@ reset.css">
 		<style type="text/css">
 			.swiper-container {
 				z-index: 0;
+				width: 100%;
 			}
 			
-			.swiper-container-horizontal>.swiper-pagination {
+			.swiper-pagination2 {
+				position: absolute;
+				text-align: center;
+				-webkit-transition: 300ms;
+				-moz-transition: 300ms;
+				-o-transition: 300ms;
+				transition: 300ms;
+				-ms-transform: translate3d(0, 0, 0);
+				-o-transform: translate3d(0, 0, 0);
+				transform: translate3d(0, 0, 0);
+				z-index: 10;
+			}
+			
+			.swiper-container-horizontal>.swiper-pagination,
+			.swiper-container-horizontal>.swiper-pagination2 {
 				width: 100%;
 				bottom: 24px;
 				left: 0;
 				height: 0;
 			}
 			
-			.swiper-pagination {
+			.swiper-pagination,
+			.swiper-pagination2 {
 				position: relative;
 			}
 			
@@ -54,10 +69,10 @@ reset.css">
 	<body style="background: #f0f0f2;" class="min-width">
 		<!--search-->
 		<div class="weui-search-bar" id="searchBar">
-			<form class="weui-search-bar__form">
+			<form class="weui-search-bar__form" method="post" action="/index.php/Home/Index/Search">
 				<div class="weui-search-bar__box">
 					<i class="weui-icon-search"></i>
-					<input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索商品" required="">
+					<input type="search" class="weui-search-bar__input" id="searchInput"  name="goods_name" placeholder="搜索商品" required="">
 					<a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
 				</div>
 				<label class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
@@ -67,199 +82,109 @@ reset.css">
 			</form>
 			<a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
 		</div>
-		<!--swiper-->
-		<div class="swiper-container">
+		<!--首页bannerr-->
+		<div class="swiper-container" id="banner">
 			<div class="swiper-wrapper">
-				<div class="swiper-slide">
-					<img src="/Public/Qian/temp/banner1.jpg" width="100%" />
-				</div>
-				<div class="swiper-slide">
-					<img src="/Public/Qian/temp/banner2.jpg" width="100%" />
-				</div>
+			   <?php if(is_array($logos)): foreach($logos as $key=>$v): ?><div class="swiper-slide">
+					  <a href="<?php echo ($v['bannerdizhi']); ?>">
+						<img src="<?php echo (substr($v['banner_pic'],1)) ?>" width="100%" />
+					  </a>
+					</div><?php endforeach; endif; ?>
 			</div>
 			<div class="swiper-pagination"></div>
 		</div>
 		<div class="decoration">
 		</div>
 		<!--new-->
-		<a class="jsd_title db-block" href="lists.html" style="color: #353535;">
+		<a class="jsd_title db-block" href="javascript:void(0)" style="color: #353535;">
 			<div class="left-name fl">新品上市</div>
-			<div class="right-open fr">
+		<!-- 	<div class="right-open fr">
 				<i class="icon iconfont">&#xe640;</i>
-			</div>
+			</div> -->
 			<div class="clear">
 
 			</div>
 		</a>
-		<div class="jsd_new-content">
-			<div class="first-block">
-				<a href="productdetail.html">
-					<img src="/Public/Qian/temp/news-pro1_02.jpg" class="ui-width-100" />
-				</a>
-			</div>
-			<div class="second-block">
-				<ul>
-					<li style="width: 52%;">
-						<a href="productdetail.html">
-							<img src="/Public/Qian/temp/news-pro2_04.jpg" />
+		<div class="swiper-container" id="new">
+			<div class="swiper-wrapper">
+			   <?php if(is_array($xinpins)): foreach($xinpins as $key=>$v): ?><div class="swiper-slide">
+						<a href="<?php echo ($v['xinpin_dizhi']); ?>">
+							<img src="<?php echo (substr($v['xinpin_logo'],1)) ?>" width="100%" />
 						</a>
-					</li>
-					<li style="width: 46%;margin-left: 2%;">
-						<a href="productdetail.html">
-							<img src="/Public/Qian/temp/news-pro3_06.jpg" />
-						</a>
-					</li>
-					<div class="clear">
-
-					</div>
-				</ul>
+					</div><?php endforeach; endif; ?>
 			</div>
-		</div>
-		<div class="decoration">
+			<div class="swiper-pagination2"></div>
 		</div>
 		<!--category-->
-		<a class="jsd_title db-block" href="lists.html" style="color: #353535;">
+		<a class="jsd_title db-block" href="javascript:void(0)" style="color: #353535;">
 			<div class="left-name fl">分类查询</div>
-			<div class="right-open fr">
+			<!-- <div class="right-open fr">
 				<i class="icon iconfont">&#xe640;</i>
-			</div>
+			</div> -->
 			<div class="clear">
 
 			</div>
 		</a>
 		<div class="decoration">
 		</div>
-		<div class="index-category ui-width-100">
-			<!--厨-->
-			<div class="item-category ui-width-100">
-				<ul class="ui-width-100">
-					<li class="c-icon fl mr-1">
-						
-						<img src="/Public/Qian/images/chu.jpg" class="icon-category ui-width-100" />
-					</li>
-					<li class="fl mr-1">
-						<a href="productdetail.html">
-							<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-						</a>
-					</li>
-					<li class="fl mr-1">
-						<a href="productdetail.html">
-							<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-						</a>
-					</li>
-					<li class="fl mr-1">
-						<a href="productdetail.html">
-							<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-						</a>
-					</li>
-					<li class="fl right-open">
-						<a href="xlists.html">
-							<img src="/Public/Qian/images/icon1_03.jpg" class="ui-width-100" />
-						</a>
-					</li>
-					<div class="clear">
-						
-					</div>
-				</ul>
-			</div>
-			<!--酿-->
-			<div class="item-category ui-width-100">
-				<ul class="ui-width-100">
-					<li class="c-icon fl mr-1">
-						<img src="/Public/Qian/images/niang.jpg" class="icon-category ui-width-100" />
-					</li>
-					<li class="fl mr-1">
-						<a href="productdetail.html">
-							<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-						</a>
-					</li>
-					<li class="fl mr-1">
-						<a href="productdetail.html">
-							<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-						</a>
-					</li>
-					<li class="fl mr-1">
-						<a href="productdetail.html">
-							<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-						</a>
-					</li>
-					<li class="fl right-open">
-						<a href="xlists.html">
-							<img src="/Public/Qian/images/icon2_03.jpg" class="ui-width-100" />
-						</a>
-					</li>
-					<div class="clear">
-						
-					</div>
-				</ul>
-			</div>
-			<!--饮-->
-			<div class="item-category ui-width-100">
-				<ul class="ui-width-100">
-					<li class="c-icon fl mr-1">
-						<img src="/Public/Qian/images/yin.jpg" class="icon-category ui-width-100" />
-					</li>
-					<li class="fl mr-1">
-						<a href="productdetail.html">
-							<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-						</a>
-					</li>
-					<li class="fl mr-1">
-						<a href="productdetail.html">
-							<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-						</a>
-					</li>
-					<li class="fl mr-1">
-						<a href="productdetail.html">
-							<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-						</a>
-					</li>
-					<li class="fl right-open">
+		<?php if(is_array($categorys)): foreach($categorys as $key=>$v): ?><div class="index-category ui-width-100">
+				<!--厨-->
+				<div class="item-category ui-width-100">
+					<ul class="ui-width-100">
+						<li class="c-icon fl mr-1">
+							<img src="<?php echo (substr($v['cat_logo'],1)) ?>" class="icon-category ui-width-100" />
+						</li>
+						<?php if(is_array($goods)): foreach($goods as $key=>$vv): if($v['cat_path'] == $vv['cat_path']): ?><li class="fl mr-1">
+									<a href="/index.php/Home/Index/goods_detail/goods_id/<?php echo ($vv['goods_id']); ?>">
+										<img src="<?php echo (substr($vv['goods_logo'],1)) ?>" class="ui-width-100" />
+									</a>
+								</li><?php endif; endforeach; endif; ?>
+						<li class="fl right-open">
+							<a href="/index.php/Home/Index/goods_list/cat_id/<?php echo ($v['cat_id']); ?>">
+								<img src="/Public/Qian/images/icon1_03.jpg?id=2016" class="ui-width-100" />
+							</a>
+						</li>
+						<div class="clear">
 
-						<a href="xlists.html">
-							<img src="/Public/Qian/images/icon3_03.jpg" class="ui-width-100" />
-						</a>
-					</li>
-					<div class="clear">
-						
-					</div>
-				</ul>
-			</div>
-			<!--居-->
-			<div class="item-category ui-width-100">
-				<ul class="ui-width-100">
-					<li class="c-icon fl mr-1">
-						<img src="/Public/Qian/images/ju.jpg" class="icon-category ui-width-100" />
-					</li>
-					<li class="fl mr-1">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</li>
-					<li class="fl mr-1">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</li>
-					<li class="fl mr-1">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</li>
-					<li class="fl right-open">
-						<a href="xlists.html">
-							<img src="/Public/Qian/images/icon4_03.jpg" class="ui-width-100" />
-						</a>
-					</li>
-					<div class="clear">
-						
-					</div>
-				</ul>
-			</div>
-		</div>
-		</div>
-
+						</div>
+					</ul>
+				</div>
+			</div><?php endforeach; endif; ?>
 		<script src="/Public/Qian/js/jquery-weui.js"></script>
 		<!--首页导航轮播-->
 		<script>
-			var swiper = new Swiper('.swiper-container', {
+			var swiper = new Swiper('#banner', {
 				pagination: '.swiper-pagination',
+			});
+			var swiper = new Swiper('#new', {
+				pagination: '.swiper-pagination2',
+				autoplay: 1000,
 			});
 		</script>
 	</body>
+<!-- 	<script type="text/javascript">
+			$(function(){
+				$("form").submit(function(){
+					$.ajax({
+						url: '/index.php/Home/Index/Search',
+						type: 'post',
+						dataType: 'json',
+						data: {goods_name:$("#searchInput").val()},
+						success:function(data){
+                           if(data != ''){
+                           	  $("#div1").remove();
+                             $(data).each(function(index,el){
+                             	var goods_logo = "<?php echo (substr($vv['goods_logo'],1)) ?>"
+                             	$("body").append('<div class="productlist ui-width-100"> <ul> <li> <a href="/index.php/Home/Index/goods_detail/goods_id/'+el.goods_id+'"> <img src="'+el.goods_logo.substring(1)+'" class="ui-width-100"/> </a> </li> <div class="clear"> </div> </ul> </div>');
+                             })
+                           }else{
 
+                           }
+						}
+					})
+                 return false;
+					
+				});
+			})
+		</script> -->
 </html>

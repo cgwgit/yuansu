@@ -29,6 +29,12 @@
 				<i class="Hui-iconfont">&#xe68f;</i></a>
 		</nav>
 		<div class="page-container">
+			<form method="post" id="myFormId" action="__CONTROLLER__/shopList">
+				<div class="text-c">
+					<input type="text" name="shop_name" placeholder="请输入门店名称或位置" style="width:150px" class="input-text">
+					<button name="" id="tijiao" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+				</div>
+			</form>
 			<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" id="btndel" class="btn btn-danger radius" onclick="activity_dels(this)">
 				<i class="Hui-iconfont" id="btndel">&#xe6e2;</i> 批量删除</a>
 			</div>
@@ -38,13 +44,14 @@
 						<tr class="text-c">
 							<th width="25"></th>
 							<th width="80">门店ID</th>
+							<th width="180">门店logo</th>
 							<th width="120">门店名称</th>
 							<th width="120">门店位置</th>
-							<th width="120">门店推荐</th>
-							<th width="120">门店特色</th>
+							<!-- <th width="120">门店推荐</th>
+							<th width="120">门店特色</th> -->
 							<th width="120">营业时间</th>
-							<th width="180">门店电话</th>
-							<th width="180">收藏人数</th>
+							<!-- <th width="180">门店电话</th> -->
+							<th width="100">收藏人数</th>
 							<th width="180">添加时间</th>
 							<th width="180">修改时间</th>
 							<th width="180">操作</th>
@@ -55,12 +62,12 @@
 						<tr class="text-c">
 							<td><input type="checkbox" id="aid" name="huodong" value="<?php echo $v['shop_id'] ?>" /></td>
 							<td><?php echo $v['shop_id'] ?></td>
+							<td><img src = "<?php echo substr($v['shop_logo'],1)?>" width="50" height = "50"></td>
 							<td><?php echo $v['shop_name'] ?></td>
 							<td><?php echo $v['shop_position'] ?></td>
-							<td><?php echo $v['shop_tuijian'] ?></td>
-							<td><?php echo $v['shop_tese'] ?></td>
+							<!-- <td><?php echo $v['shop_tuijian'] ?></td>
+							<td><?php echo $v['shop_tese'] ?></td> -->
 							<td><?php echo $v['shop_stime'] ?>--<?php echo $v['shop_etime'] ?></td>
-							<td><?php echo $v['shop_tel'] ?></td>
 							<td><u style="cursor:pointer" class="text-primary" onClick="article_list('查看','__CONTROLLER__/shoucangList/shop_id/<?php echo $v['shop_id'] ?>','800','500')" title="查看"><?php echo $v['shop_shoucang'] ?>人</u></td>
 							<td><?php echo date('Y-m-d H:i:s', $v['shop_addtime']) ?></td>
 							<td><?php echo date('Y-m-d H:i:s', $v['shop_uptime']) ?></td>

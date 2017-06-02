@@ -17,16 +17,54 @@ class ShopController extends Controller {
 	    	$shopInfo = M()->query($sql);
 	    	echo json_encode($shopInfo);exit;
     	}else{
-	        $jssdk = new \Home\Model\WechatModel();
-	        $signPackage = $jssdk->GetSignPackage();
-	        $this->assign('signPackage', $signPackage);
-	    	$this->display();
+            if(session('openid')){
+
+                //获取微信签名包信息
+                $jssdk = new \Home\Model\WechatModel();
+                $signPackage = $jssdk->GetSignPackage();
+                $this->assign('signPackage', $signPackage);
+            	$this->display();
+            }else{
+                 $model = new \Home\Model\WechatModel();
+                 $openid_accesstoken = $model->openId();
+                 $rst = M('user')->where(array('user_openid' => $openid_accesstoken['openid']))->find();
+                 if($rst){
+                    session('openid',$openid_accesstoken['openid']);
+                    session('user_id', $rst['user_id']);
+                    $jssdk = new \Home\Model\WechatModel();
+                    $signPackage = $jssdk->GetSignPackage();
+                    $this->assign('signPackage', $signPackage);
+                    $this->display();exit;
+                }else{
+                    $userInfo = $model->getOpenId($openid_accesstoken['openid'],$openid_accesstoken['access_token']);
+                    $data = array(
+                        'user_img' => $userInfo['headimgurl'],
+                        'user_openid' => $userInfo['openid'],
+                        'user_name' => filter($userInfo['nickname']),
+                        'user_register_time' => time(),
+                        'city' => $userInfo['city'],
+                        'province' => $userInfo['province']
+                        );
+                    $id = M('user')->add($data);
+                    session('openid', $userInfo['openid']);
+                    session('user_id',$id);
+                    $jssdk = new \Home\Model\WechatModel();
+                    $signPackage = $jssdk->GetSignPackage();
+                    $this->assign('signPackage', $signPackage);
+                    $this->display();
+                }
+            }
     	}
     }
     public function shopDetail(){
     	$shop_id = $_GET['shop_id'];
+        //门店信息
     	$shopInfo = M('shop')->where(array('shop_id' => $shop_id))->find();
+        //门店图集
     	$Pics = M('shop_pic')->where(array('shop_id' => $shop_id))->select();
+        $user_id = session('user_id');
+        $rst = M('shop_shoucang')->where(array('shop_id' =>$shop_id,'user_id' => $user_id))->find();
+        $this->assign('rst', $rst);
     	$this->assign('shopInfo', $shopInfo);
     	$this->assign('Pics', $Pics);
     	$this->display();
@@ -52,6 +90,7 @@ class ShopController extends Controller {
         $reg = '/省(.+)市/U';
         preg_match_all($reg, $str, $result);
         $shopInfo['shop_position'] = $result[1][0]."市";
+        
     	$this->assign('shopInfo', $shopInfo);
     	$this->display();
     }

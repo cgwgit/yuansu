@@ -28,7 +28,18 @@ class GoodsController extends Controller {
       $this->assign('goodsinfo', $goodsinfo);
       $this->display('showOne');exit;
     }
-    $count = $model->count();
+    $where = '2>1';
+    $post = I('post.');
+    if(!empty($post['goods_name'])){
+      $where .= " AND `goods_name` like '%{$post['goods_name']}%'";
+    }
+    if(!empty($post['cat_id'])){
+      $where .= " AND `cat_id` = '{$post['cat_id']}'";
+    }
+    if($post['status'] != ''){
+      $where .= " AND `status` = '{$post['status']}'";
+    }
+    $count = $model->where($where)->count();
     $Page = new \Think\Page($count,10);
     $Page -> setConfig('prev','上一页');
     $Page -> setConfig('next','下一页');
@@ -36,7 +47,9 @@ class GoodsController extends Controller {
     $Page -> setConfig('last','末页');
     $Page -> lastSuffix = false;  //将末页从数字的显示方式切换成汉字提示
     $show = $Page->show();
-    $list = $model->order('goods_id')->limit($Page->firstRow.','.$Page->listRows)->select();
+    $list = $model->where($where)->order('goods_id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+    $categorys = M('category')->where(array('cat_level' => 0))->select();
+    $this->assign('categorys', $categorys);
     $this->assign('goods', $list);
     $this->assign('page', $show);
     $this->display();
@@ -55,14 +68,16 @@ class GoodsController extends Controller {
                     'goods_rongji' => $post['rongji'],
                     'goods_color' => $post['yanse'],
                     'goods_tedian' =>$post['tedian'],
-                    'goods_logo' => $rst['logo_pic'],
-                    'goods_zhanshi' => $rst['zhanshi_pic'],
+                    'goods_logo' => $rst,
                     'goods_addtime' => time(),
                     'goods_uptime' => time(),
                     'status' => $post['status']
         );
         $id = $goods_Model->add($data);
         if($id){
+            //对产品展示图集的处理
+            $this->pics_deals($id);
+            //对视频应用简介的logo图片的处理
             $this->pics_deal($id,$post);
             echo json_encode(array('code' => 1,'msg' => '产品信息添加成功'));exit;
         }else{
@@ -82,7 +97,8 @@ class GoodsController extends Controller {
       $post = I('post.');
       !empty($post['goods_Name']) ? $goods_name = trim($post['goods_Name']) : $this->err('产品名称不能为空');
       !empty($post['cat_id']) ? $cat_id = trim($post['cat_id']) : $this->err('请选择所属分类');
-      $rst = $this->logo_deal1($post);
+      //对产品logo的处理
+      $rst = $this->logo_deal($post['goods_Id'],$post);
       $data = array(
                     'goods_id' => $post['goods_Id'],
                     'goods_name' => $goods_name,
@@ -90,23 +106,30 @@ class GoodsController extends Controller {
                     'goods_rongji' => $post['rongji'],
                     'goods_color' => $post['yanse'],
                     'goods_tedian' =>$post['tedian'],
-                    'goods_logo' => $rst['logo_pic'],
-                    'goods_zhanshi' => $rst['zhanshi_pic'],
+                    'goods_logo' => $rst,
                     'goods_uptime' => time(),
                     'status' => $post['status']
         );
+      $this->pics_deals($post['goods_Id']);
       $rst = M('goods')->save($data);
       if($rst !== false){
         echo json_encode(array('code' => 1,'msg' => '产品基本信息编辑成功'));exit;
       }
       echo json_encode(array('code' => 0,'msg' => '产品基本信息编辑失败'));exit;
     }else{
+      //产品信息
       $goodsinfo = M('goods')->where(array('goods_id' => $aid))->find();
+      //分类信息
       $category = M('category')->where(array('cat_id' => $goodsinfo['cat_id']))->find();
       $categorys = M('category')->where(array('cat_level' => 0))->select();
+      //简介
       $jianjie = M('goods_jianjie')->where(array('goods_id' => $aid))->select();
+      // 视频
       $shipin = M('goods_shipin')->where(array('goods_id' => $aid))->select();
+      // 应用
       $yingyong = M('goods_yingyong')->where(array('goods_id' => $aid))->select();
+      $goods_pic = M('goods_pic')->where(array('goods_id' => $aid))->select();
+      $this->assign('goods_pic', $goods_pic);
       $this->assign('jianjie', $jianjie);
       $this->assign('shipin', $shipin);
       $this->assign('yingyong', $yingyong);
@@ -323,8 +346,8 @@ class GoodsController extends Controller {
         }
       }
     }
-    //视频图片的处理
-    public function shipin_logo(){
+    //编辑视频图片的处理
+    public function shipin_logo($post){
           if($post['id'] != ''){
            if($_FILES['shipin_pic']['error']===0){
             //A.大图logo处理
@@ -399,9 +422,19 @@ class GoodsController extends Controller {
       echo json_encode(array('code' => 1));exit;
     }
   }
-    private function logo_deal(){
+  //删除产品展示图集
+  public function delPics(){
+        $pics_id = I('get.pics_id');
+        $picsinfo = D('goods_pic')->find($pics_id);
+        //① 删除物理图片
+        unlink($picsinfo['goods_pics']);
+        //② 删除记录信息
+        D('goods_pic')->delete($pics_id);
+    }
+  //产品logo图片的上传
+    private function logo_deal($id,$post){
         //判断有进行正常的附加上传
-        if($_FILES['logo_pic']['error']===0 && $_FILES['zhanshi_pic']['error']===0){
+        if($_FILES['logo_pic']['error']===0){
             //A.大图logo处理
             //tp框架现成功能类实现附件上传(Think\Upload.class.php)
             //保存附件图片的根目录
@@ -413,14 +446,16 @@ class GoodsController extends Controller {
 
             //通过uploadOne的返回值可以获得附件上传到服务器的情况信息
             //例如：存储目录、存储名字等
-            $z = $up -> upload($_FILES);
-            $data = array();
-            foreach ($z as $key => $value) {
-              $data[$key] = $up->rootPath.$value['savepath'].$value['savename'];
-            }
+              $z = $up -> uploadOne($_FILES['logo_pic']);
+              $data = $up->rootPath.$z['savepath'].$z['savename'];
             return $data;die;
         }else{
-            echo json_encode(array('code' => 0,'msg' => '请添加logo图片或展示图片'));exit;
+           if($post){
+                return $post['yuan_logo_pic'];
+            }else{
+                M('goods')->where(array('shop_id' => $id))->delete();
+                echo json_encode(array('code' => 0,'msg' => '请添加产品logo图片'));exit;
+            }
         }
     }
 
@@ -536,6 +571,41 @@ class GoodsController extends Controller {
             }
           } 
     }
+        //处理相册
+    private function pics_deals($goods_id){
+        //判断是否有上传相册，遍历error的信息即可，只有有一个为"0"
+        //就给做上传处理
+        $up_pics = false;
+        foreach($_FILES['zhanshi_pic']['error'] as $k => $v){
+            if($v === 0){
+                $up_pics = true;
+                break;
+            }
+        }
+        if($up_pics === true){
+            $cfg = array(
+                'rootPath'      =>  './Public/Upload/', //保存根路径
+                'exts'          =>  array('jpg','jpeg','png','gif'), //允许上传的文件后缀
+            );
+            $up = new \Think\Upload($cfg);
+            
+            //$_FILES: logo_tu和zhanshi_pic两部分附件
+            //upload(array('pics_tu'=>array(name=>123,error=>,tmp_name=>,size=>,type=>)))
+            //多图片上传
+            $z = $up -> upload(array('zhanshi_pic'=>$_FILES['zhanshi_pic']));
+            //遍历$z,并制作缩略图，完成sp_goods_pics数据表的记录填充
+            $arr = array();
+            foreach($z as $m => $n){
+                //小图：50*50  中图:350*350  大图:800*800
+                // $im = new \Think\Image();
+                $goods_pic = $up->rootPath.$n['savepath'].$n['savename'];
+                $arr['goods_id'] = $goods_id;
+                $arr['goods_pics'] = $goods_pic;
+                D('goods_pic')->add($arr);
+            }
+        }
+
+    }
     //删除简介
     public function del_Pic(){
         $pics_id = I('get.pics_id');
@@ -568,7 +638,7 @@ class GoodsController extends Controller {
       
      private function logo_deal1($post){
         //判断有进行正常的附加上传
-        if($_FILES['logo_pic']['error']===0 || $_FILES['zhanshi_pic']['error']===0){
+        if($_FILES['logo_pic']['error']===0){
             //A.大图logo处理
             //tp框架现成功能类实现附件上传(Think\Upload.class.php)
             //保存附件图片的根目录
@@ -605,7 +675,6 @@ class GoodsController extends Controller {
           //没有新上传的logo和展示图
           if($post){
               $data['logo_pic'] = $post['yuan_logo_pic'];
-              $data['zhanshi_pic'] = $post['yuan_zhanshi_pic'];
               return $data;exit;
           }
         }
@@ -616,7 +685,10 @@ class GoodsController extends Controller {
         //删除单个活动
         $goods = M('goods')->where(array('goods_id' => $aid))->find();
         unlink($goods['goods_logo']);
-        unlink($goods['goods_zhanshi']);
+        $goods_pics = M('goods_pic')->where(array('goods_id' => $aid))->select();
+        foreach ($goods_pics as $key => $value) {
+          unlink($value['goods_pics']);
+        }
         $jianjie = M('goods_jianjie')->where(array('goods_id' => $aid))->select();
         foreach ($jianjie as $key => $value) {
           unlink($value['goods_jianjie_pic']);
@@ -640,26 +712,42 @@ class GoodsController extends Controller {
           $goods = M('goods')->where($wh)->select();
           foreach ($goods as $key => $value) {
               unlink($value['goods_logo']);
-              unlink($value['goods_zhanshi']);
+              //删除简介
               $jianjie = M('goods_jianjie')->where(array('goods_id' => $value['goods_id']))->select();
               foreach ($jianjie as $k => $v) {
               unlink($v['goods_jianjie_pic']);
             }
+            //删除视频
             $shipin = M('goods_shipin')->where(array('goods_id' => $value['goods_id']))->select();
           foreach ($shipin as $k => $v) {
             unlink($v['goods_shipin_pic']);
           }
+          //删除应用
           $yingyong = M('goods_yingyong')->where(array('goods_id' => $value['goods_id']))->select();
            foreach ($yingyong as $k => $v) {
             unlink($v['goods_yingyong_pic']);
+          }
+          //删除展示图集
+          $pics = M('goods_pic')->where(array('goods_id' => $value['goods_id']))->select();
+          foreach ($pics as $k => $v) {
+            unlink($v['goods_pics']);
           }
         }
         $rst1 = M('goods')->where($wh)->delete();
         $rst2 = M('goods_jianjie')->where($wh)->delete();
         $rst3 = M('goods_shipin')->where($wh)->delete();
         $rst4 = M('goods_yingyong')->where($wh)->delete();
+        $rst5 = M('goods_pic')->where($wh)->delete();
          echo json_encode(array('code' => 1));exit;
     }
 }
+
+  //收藏列表
+  public function goods_shoucangList(){
+        $goods_id = $_GET['goods_id'];
+        $Info = M('goods_shoucang')->join('sp_user on sp_user.user_id=sp_goods_shoucang.user_id')->where(array('goods_id' => $goods_id))->select();
+        $this->assign('user', $Info);
+        $this->display();
+  }
 
 }

@@ -37,10 +37,10 @@
                 <table class="table table-border table-bordered table-bg table-hover table-sort">
                     <thead>
                         <tr class="text-c">
-                            <th width="25"></th>
                             <th width="80">ID</th>
-                            <th width="120">Banner名称</th>
                             <th width="120">图片</th>
+                            <th width="120">Banner名称</th>
+                            <th width="120">链接地址</th>
                             <th width="180">添加时间</th>
                             <th width="180">修改时间</th>
                             <th width="180">操作</th>
@@ -49,19 +49,19 @@
                     <tbody>
                     <foreach name="banner" item="v">
                         <tr class="text-c">
-                            <td><input type="checkbox" id="aid" name="huodong" value="<?php echo $v['id'] ?>" /></td>
                             <td><?php echo $v['id'] ?></td>
-                            <td><?php echo $v['banner_name'] ?></td>
                             <td><img src="<?php echo (substr($v['banner_pic'],1)) ?>" width="50" height="50"></td>
+                            <td><?php echo $v['banner_name'] ?></td>
+                            <td><?php echo $v['bannerdizhi'] ?></td>
                             <td><?php echo date('Y-m-d H:i:s', $v['banner_addtime']) ?></td>
                             <td><?php echo date('Y-m-d H:i:s', $v['banner_uptime']) ?></td>
                             <td class="td-manage">
                                 <a title="编辑" href="__CONTROLLER__/editBanner/id/<?php echo $v['id'] ?>" class="ml-10" style="text-decoration:none">
                                     <i class="Hui-iconfont">&#xe6df;</i>
                                 </a>
-                             <!--    <a title="删除" href="javascript:;" onclick="activity_del(this,'<?php echo $v['id'] ?>')" class="ml-10" style="text-decoration:none">
+                                <a title="删除" href="javascript:;" onclick="activity_del(this,'<?php echo $v['id'] ?>')" class="ml-10" style="text-decoration:none">
                                     <i class="Hui-iconfont">&#xe6e2;</i>
-                                </a> -->
+                                </a>
                                <a href="javascript:;" class="ml-10" onclick="activity_detail('查看','__CONTROLLER__/showList/id/<?php echo $v['id'] ?>','800','500')">查看</a>
                             </td>
                         </tr>
@@ -166,7 +166,7 @@
                 layer.confirm('确认要删除吗？', function(index) {
                     $.ajax({
                         type: 'get',
-                        url: '__CONTROLLER__/delCategory',
+                        url: '__CONTROLLER__/delBanner',
                         data:{'aid':id},
                         dataType: 'json',
                         success: function(data) {

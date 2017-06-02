@@ -15,10 +15,10 @@
 	<body  class="min-width">
 		<!--search-->
 		<div class="weui-search-bar" id="searchBar">
-			<form class="weui-search-bar__form">
+			<form class="weui-search-bar__form" method="post" action="/index.php/Home/Index/Search">
 				<div class="weui-search-bar__box">
 					<i class="weui-icon-search"></i>
-					<input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索商品" required="">
+					<input type="search" class="weui-search-bar__input" id="searchInput" name="goods_name" placeholder="搜索商品" required="">
 					<a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
 				</div>
 				<label class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
@@ -29,212 +29,27 @@
 			<a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
 		</div>
 		<!--series-->
-		<div class="stitle">
-			<img src="/Public/Qian/images/chu.jpg" class="series-icon fl" />
-
-			<!--<img src="/Public/Qian/images/niang.jpg" class="series-icon fl"/>
-			<img src="/Public/Qian/images/yin.jpg" class="series-icon fl"/>
-			<img src="/Public/Qian/images/ju.jpg" class="series-icon fl"/>-->
-			<div class="seriesName fl">
-				液体调味系列
-			</div>
-			<div class="clear">
-
-			</div>
-		</div>
-		<div class="productlist ui-width-100">
-			<ul>
-				<li>
-					<a href="productdetail.html">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</a>
-				</li>
-				<li>
-					<a href="productdetail.html">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</a>
-				</li>
-				<li>
-					<a href="productdetail.html">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</a>
-				</li>
-				<li>
-					<a href="productdetail.html">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</a>
-				</li>
-				<li>
-					<a href="productdetail.html">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</a>
-				</li>
-				<li>
-					<a href="productdetail.html">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</a>
-				</li>
+		<?php if(is_array($xilie)): foreach($xilie as $key=>$v): ?><div class="stitle">
+				<img src="<?php echo (substr($v['cat_logo'],1)) ?>" class="series-icon fl" />
+				<div class="seriesName fl">
+					<?php echo ($v['cat_name']); ?>
+				</div>
 				<div class="clear">
 
 				</div>
-			</ul>
-		</div>
-
-		<div class="stitle">
-
-			<img src="/Public/Qian/images/niang.jpg" class="series-icon fl" />
-			<!--<img src="/Public/Qian/images/chu.jpg" class="series-icon fl"/>
-			<img src="/Public/Qian/images/yin.jpg" class="series-icon fl"/>
-			<img src="/Public/Qian/images/ju.jpg" class="series-icon fl"/>-->
-			<div class="seriesName fl">
-				液体调味系列
 			</div>
-			<div class="clear">
+			<div class="productlist ui-width-100">
+				<ul>
+				  <?php if(is_array($goods)): foreach($goods as $key=>$vv): if($v['cat_id'] == $vv['cat_id']): ?><li>
+						<a href="/index.php/Home/Index/goods_detail/goods_id/<?php echo ($vv['goods_id']); ?>">
+							<img src="<?php echo (substr($vv['goods_logo'],1)) ?>" class="ui-width-100" />
+						</a>
+					</li><?php endif; endforeach; endif; ?>
+					<div class="clear">
 
-			</div>
-		</div>
-		<div class="productlist ui-width-100">
-			<ul>
-				<li>
-					<a href="productdetail.html">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</a>
-				</li>
-				<li>
-					<a href="productdetail.html">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</a>
-				</li>
-				<li>
-					<a href="productdetail.html">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</a>
-				</li>
-				<li>
-					<a href="productdetail.html">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</a>
-				</li>
-				<li>
-					<a href="productdetail.html">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</a>
-				</li>
-				<li>
-					<a href="productdetail.html">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</a>
-				</li>
-				<div class="clear">
-
-				</div>
-			</ul>
-		</div>
-		<div class="stitle">
-			<img src="/Public/Qian/images/yin.jpg" class="series-icon fl" />
-			<!--
-				<img src="/Public/Qian/images/niang.jpg" class="series-icon fl" />
-				img src="/Public/Qian/images/chu.jpg" class="series-icon fl"/>
-			<img src="/Public/Qian/images/yin.jpg" class="series-icon fl"/>
-			<img src="/Public/Qian/images/ju.jpg" class="series-icon fl"/>-->
-			<div class="seriesName fl">
-				液体调味系列
-			</div>
-			<div class="clear">
-
-			</div>
-		</div>
-
-		<div class="productlist ui-width-100">
-			<ul>
-				<li>
-					<a href="productdetail.html">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</a>
-				</li>
-				<li>
-					<a href="productdetail.html">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</a>
-				</li>
-				<li>
-					<a href="productdetail.html">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</a>
-				</li>
-				<li>
-					<a href="productdetail.html">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</a>
-				</li>
-				<li>
-					<a href="productdetail.html">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</a>
-				</li>
-				<li>
-					<a href="productdetail.html">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</a>
-				</li>
-				<div class="clear">
-
-				</div>
-			</ul>
-		</div>
-
-		<div class="stitle">
-			<img src="/Public/Qian/images/ju.jpg" class="series-icon fl" />
-			<!--
-				<img src="/Public/Qian/images/niang.jpg" class="series-icon fl" />
-				img src="/Public/Qian/images/chu.jpg" class="series-icon fl"/>
-			<img src="/Public/Qian/images/yin.jpg" class="series-icon fl"/>
-			-->
-			<div class="seriesName fl">
-				液体调味系列
-			</div>
-			<div class="clear">
-
-			</div>
-		</div>
-
-		<div class="productlist ui-width-100">
-			<ul>
-				<li>
-					<a href="productdetail.html">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</a>
-				</li>
-				<li>
-					<a href="productdetail.html">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</a>
-				</li>
-				<li>
-					<a href="productdetail.html">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</a>
-				</li>
-				<li>
-					<a href="productdetail.html">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</a>
-				</li>
-				<li>
-					<a href="productdetail.html">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</a>
-				</li>
-				<li>
-					<a href="productdetail.html">
-						<img src="/Public/Qian/temp/product_03.jpg" class="ui-width-100" />
-					</a>
-				</li>
-				<div class="clear">
-
-				</div>
-			</ul>
-		</div>
+					</div>
+				</ul>
+			</div><?php endforeach; endif; ?>
 		<script src="/Public/Qian/js/jquery-weui.js"></script>
 
 	</body>

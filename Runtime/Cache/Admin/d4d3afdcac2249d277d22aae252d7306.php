@@ -33,27 +33,21 @@
 			</tr>
 			<tr class="text-c">
 				<th width="40">ID</th>
+				<th width="130">用户头像</th>
 				<th width="150">用户昵称</th>
 				<th width="150">用户手机号</th>
-				<th width="130">用户头像</th>
 				<th width="130">用户所在城市</th>
 				<th width="130">用户关注时间</th>
-				<th width="130">操作</th>
 			</tr>
 		</thead>
 		<tbody>
 		   <?php if(is_array($user)): foreach($user as $key=>$v): ?><tr class="text-c">
 				<td><?php echo $v['user_id'] ?></td>
+				<td><img width="40" height="40" src="<?php echo $v['user_img'] ?>"></td>
 				<td><?php echo $v['user_name'] ?></td>
 				<td><?php echo $v['user_tel'] ?></td>
-				<td><img width="40" height="40" src="<?php echo $v['user_img'] ?>"></td>
-				<td><?php echo $v['province'] ?>省<?php echo $v['city'] ?>市</td>
+				<td><?php echo $v['city'] ?></td>
 				<td><?php echo date('Y-m-d H:i:s', $v['user_register_time']) ?></td>
-				<td class="td-manage">
-							<a title="删除" href="javascript:;" onclick="activity_del(this,'<?php echo $v['user_id'] ?>')" class="ml-10" style="text-decoration:none">
-								<i class="Hui-iconfont">&#xe6e2;</i>
-							</a>
-				</td>
 			</tr><?php endforeach; endif; ?>
 		</tbody>
 	</table>

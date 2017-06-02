@@ -44,7 +44,7 @@
 				        }
 				    }
 				});
-
+                 //微信获取地理位置并拉取用户列表
 				 wx.getLocation({
 				    success: function (res) {
 				        var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
@@ -57,7 +57,7 @@
                         	success:function(shopInfo){
                         		//index是下表，el是值
                                $(shopInfo).each(function(index,el){
-                                    $("#list").append('<div class="item-store"> <a class="s-top ui-width-100 ui-flex" href="__CONTROLLER__/shopDetail/shop_id/'+el.shop_id+'"> <img src="'+el.shop_logo.substring(1)+'" class="s-img"/> <div class="s-message"> <h4>'+el.shop_name+'</h4> <div class="s-address">'+el.shop_position+'</div> </div> </a> <div class="s-bottom-block ui-width-100"> <ul> <li class="br"> <a href="tel:'+el.shop_tel+'" class="db-block"> <i class="icon iconfont">&#xe624;</i>'+el.shop_tel+'</a> </li> <li> <a href="__CONTROLLER__/daohang/shop_id/'+el.shop_id+'" class="db-block"> <i class="icon iconfont">&#xe66c;</i> 一键导航 <span class="kilemiter"> '+el.distance/1000+'km </span> </a> </li> </ul> </div> </div>');
+                                    $("#list").append('<div class="item-store"> <a class="s-top ui-width-100 ui-flex" href="__CONTROLLER__/shopDetail/shop_id/'+el.shop_id+'"> <img src="'+el.shop_logo.substring(1)+'" class="s-img"/> <div class="s-message"> <h4>'+el.shop_name+'</h4> <div class="s-address">'+el.shop_position+'</div> </div> </a> <div class="s-bottom-block ui-width-100"> <ul>  <li> <a href="__CONTROLLER__/daohang/shop_id/'+el.shop_id+'" class="db-block"> <i class="icon iconfont">&#xe66c;</i> 一键导航 <span class="kilemiter"> '+el.distance/1000+'km </span> </a> </li> </ul> </div> </div>');
                                })                        
                          	}
                         });
@@ -73,12 +73,12 @@
 	<body class="min-width">
 		<!--search-->
 		<div class="box_storeTop">
-			<div class="leftAddress">
+			<div class="leftAddress" style="border:0;">
 				
-			<input type="text" value="青岛市" class="city" id="quxiao"readonly="" style="width:50px;overflow: hidden;max-width: 50px;display: inline-block;height: 40px;border:0;background:none;float: left;" >
+			<input type="text" value="青岛市" class="city" id="quxiao" readonly="true" style="width:50px;overflow: hidden;max-width: 50px;display: inline-block;height: 40px;border:0;background:none;float: left;" >
 				<i class="icon iconfont" style="color: #4b4949;display: inline-block;float: left;vertical-align: middle;">&#xe60e;</i>
 			</div>
-			<div class="weui-search-bar" id="searchBar" >
+	<!-- 		<div class="weui-search-bar" id="searchBar" >
 			<form class="weui-search-bar__form" >
 				<div class="weui-search-bar__box">
 					<i class="weui-icon-search"></i>
@@ -91,7 +91,7 @@
 		        </label>
 			</form>
 			<a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
-		</div>
+		</div> -->
 		
 		</div>
 		<!--lists-->
@@ -104,6 +104,7 @@
 	</body>
 </html>
 	<script type="text/javascript">
+	//根据城市下拉框选择所在的城市并列出列表
 	$(function(){
 		$("body").delegate(".picker-box .city-picker li","click",function(){
 			var city = $(this).text();
@@ -114,16 +115,20 @@
 				success:function(data){
                     if(data.code != 0){
                     	$(".item-store").remove();
-                    	    $(data).each(function(index,el){
-                                    $("#list").append('<div class="item-store"> <a class="s-top ui-width-100 ui-flex" href="__CONTROLLER__/shopDetail/shop_id/'+el.shop_id+'"> <img src="'+el.shop_logo.substring(1)+'" class="s-img"/> <div class="s-message"> <h4>'+el.shop_name+'</h4> <div class="s-address">'+el.shop_position+'</div> </div> </a> <div class="s-bottom-block ui-width-100"> <ul> <li class="br"> <a href="tel:'+el.shop_tel+'" class="db-block"> <i class="icon iconfont">&#xe624;</i>'+el.shop_tel+'</a> </li> <li> <a href="http://api.map.baidu.com/direction?origin=latlng:36.09297,120.3743|name:我的位置&destination=山东省青岛市利群宇恒大厦&mode=driving&output=html&src=yourCompanyName|yourAppName" class="db-block"> <i class="icon iconfont">&#xe66c;</i> 一键导航</a> </li> </ul> </div> </div>');
-                               });  
+                        if($(".empty-store") != ''){
+                        	$(".empty-store").remove();
+                        }
+                	    $(data).each(function(index,el){
+                                $("#list").append('<div class="item-store"> <a class="s-top ui-width-100 ui-flex" href="__CONTROLLER__/shopDetail/shop_id/'+el.shop_id+'"> <img src="'+el.shop_logo.substring(1)+'" class="s-img"/> <div class="s-message"> <h4>'+el.shop_name+'</h4> <div class="s-address">'+el.shop_position+'</div> </div> </a> <div class="s-bottom-block ui-width-100"> <ul> <li> <a href="__CONTROLLER__/daohang/shop_id/'+el.shop_id+'" class="db-block"> <i class="icon iconfont">&#xe66c;</i> 一键导航</a> </li> </ul> </div> </div>');
+                           });  
                     }else{
 	         	      $(".item-store").remove();
-	         	      $("#list").append('<div class="empty-store"> <i class="icon iconfont">&#xe690;</i> <div class="word"> 暂时还没有店铺哦~ </div> </div>');
+	         	      $("#list").append('<div class="empty-store"> <i class="icon iconfont">&#xe690;</i> <div class="word"> 附近暂时还没有店铺哦~ </div> <div class="box-btn-md" style="background: #f0f0f2;"> <a href="javascript:void(0)" onclick="cityList()" class="btn-md">搜索其他城市门店</a> </div></div>');
 	              }
 				},
 			})
 		});
+	  //暂时不用
 		$("form").submit(function(){
 		    var city = $("#searchInput").val();
         	$.ajax({
@@ -135,7 +140,7 @@
                     if(data.code != 0){
                     	$(".item-store").remove();
                 	    $(data).each(function(index,el){
-                            $("#list").append('<div class="item-store"> <a class="s-top ui-width-100 ui-flex" href="__CONTROLLER__/shopDetail/shop_id/'+el.shop_id+'"> <img src="'+el.shop_logo.substring(1)+'" class="s-img"/> <div class="s-message"> <h4>'+el.shop_name+'</h4> <div class="s-address">'+el.shop_position+'</div> </div> </a> <div class="s-bottom-block ui-width-100"> <ul> <li class="br"> <a href="tel:'+el.shop_tel+'" class="db-block"> <i class="icon iconfont">&#xe624;</i>'+el.shop_tel+'</a> </li> <li> <a href="http://api.map.baidu.com/direction?origin=latlng:36.09297,120.3743|name:我的位置&destination=山东省青岛市利群宇恒大厦&mode=driving&output=html&src=yourCompanyName|yourAppName" class="db-block"> <i class="icon iconfont">&#xe66c;</i> 一键导航</a> </li> </ul> </div> </div>');
+                            $("#list").append('<div class="item-store"> <a class="s-top ui-width-100 ui-flex" href="__CONTROLLER__/shopDetail/shop_id/'+el.shop_id+'"> <img src="'+el.shop_logo.substring(1)+'" class="s-img"/> <div class="s-message"> <h4>'+el.shop_name+'</h4> <div class="s-address">'+el.shop_position+'</div> </div> </a> <div class="s-bottom-block ui-width-100"> <ul> <li> <a href="__CONTROLLER__/daohang/shop_id/'+el.shop_id+'" class="db-block"> <i class="icon iconfont">&#xe66c;</i> 一键导航</a> </li> </ul> </div> </div>');
                         });  
                     }else{
                      $(".item-store").remove();
@@ -148,4 +153,9 @@
 		});
 	});
 		
+	</script>
+	<script type="text/javascript">
+		function cityList(){
+			$(".city").triggerHandler("focus");
+		}
 	</script>

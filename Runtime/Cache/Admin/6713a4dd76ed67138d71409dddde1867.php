@@ -112,29 +112,77 @@
 									<input type="text" class="input-text" value="<?php echo ($goodsinfo['goods_tedian']); ?>" placeholder=""  name="tedian">
 								</div>
 							</div>
-							<div class="row cl">
+							<div class="row cl" id="label-input">
 								<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>首页展示：</label>
 								<div class="formControls col-xs-8 col-sm-9">
-									是<input type="radio" value="1"<?php if($goodsinfo['status'] == 1): ?>checked="checked"<?php endif; ?>  name="status">
-									否<input type="radio" value="0"<?php if($goodsinfo['status'] == 0): ?>checked="checked"<?php endif; ?> name="status">
+									<div class="radio-box">
+									    <input type="radio" value="1" <?php if($goodsinfo['status'] == 1): ?>checked="checked"<?php endif; ?>name="status">
+									    <label for="radio-1">是</label>
+									  </div>
+									<div class="radio-box">
+									    <input type="radio" value="0" <?php if($goodsinfo['status'] == 0): ?>checked="checked"<?php endif; ?>name="status">
+									    <label for="radio-1">否</label>
+									  </div>
 								</div>
 							</div>
 							<div class="row cl mt-20 mb-20">
 									<label class="form-label col-xs-4 col-sm-2">产品logo图：</label>
 									<div class="formControls col-xs-8 col-sm-9">
 					                    <input type="file" class="input-text" placeholder="" name="logo_pic">
+					                    图片尺寸：(672*452px)
 					                    <img src="<?php echo (substr($goodsinfo['goods_logo'],1)) ?>" width="50" height="50"/>
 					                    <input type="hidden" class="input-text" placeholder="" name="yuan_logo_pic" value="<?php echo $goodsinfo['goods_logo'] ?>">
 					                </div>
 							</div>
-							<div class="row cl mt-20 mb-20">
+							  <script type="text/javascript">
+                        //增加相册<tr><td height="20" bgcolor="#FFFFFF" class="STYLE6"><div align="right"><span class="STYLE19" onclick="$(this).parent().parent().parent().remove()">[-]&nbsp;相册图片：</span></div></td><td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="left"><input type="file" name="pics_tu[]" /></div></td></tr>
+                        function add_pics(){
+                          $('#gallery-tab-show').append(' <div class="aa"><label class="form-label col-xs-4 col-sm-2"><span class="STYLE19" onclick="$(this).parent().parent().remove()">[-]&nbsp;</span>门店图片:</label><div class="formControls col-xs-8 col-sm-9"><input type="file" class="input-text" value="20" placeholder="" name="zhanshi_pic[]"></div></div>');
+                        }
+
+            /*商品-删除*/
+            function activity_del(obj, pics_id) {
+                layer.confirm('确认要删除吗？', function(index) {
+                       $.ajax({
+                            url:"/index.php/Admin/Goods/delPics",
+                            data:{'pics_id':pics_id},
+                            success:function(msg){
+                              //dom方式删除li的元素节点对象
+                              $('.pics_'+pics_id).remove();
+                              layer.msg('已删除!', {
+                                icon: 1,
+                                time: 1000
+                            });
+                            }
+                          });
+                });
+            }
+                    </script>
+                     <div class="row cl mt-20 mb-20">
+                       <label class="form-label col-xs-4 col-sm-2">产品展示图：</label>
+                       <div class="formControls col-xs-8 col-sm-9">
+                            <div id="default">
+                              <?php if(is_array($goods_pic)): foreach($goods_pic as $key=>$v): ?><img class = "pics_<?php echo ($v["id"]); ?>" width="80px" height="80px" src="<?php echo substr($v['goods_pics'],1) ?>"><span style='color:red;' class = "pics_<?php echo ($v["id"]); ?>" onclick="activity_del(this,'<?php echo $v['id'] ?>')">[-]</span><?php endforeach; endif; ?>
+                            </div>
+                       </div>
+                    </div>
+                    <div class="row cl mt-20 mb-20" id="gallery-tab-show">
+                                <div class="aa">
+                                    <label class="form-label col-xs-4 col-sm-2"><span class="STYLE19" onclick="add_pics()">[+]&nbsp;</span>产品展示图:</label>
+                                    <div class="formControls col-xs-8 col-sm-9">
+                                        <input type="file" class="input-text" value="20" placeholder="" name="zhanshi_pic[]">
+                                          图片尺寸：(750*580px)
+                                    </div>
+                                </div>
+                    </div>
+							<!-- <div class="row cl mt-20 mb-20">
 									<label class="form-label col-xs-4 col-sm-2">产品展示图：</label>
 									<div class="formControls col-xs-8 col-sm-9">
 					                    <input type="file" class="input-text"  placeholder="" name="zhanshi_pic">
 					                    <img src="<?php echo (substr($goodsinfo['goods_zhanshi'],1)) ?>" width="50" height="50"/>
 					                    <input type="hidden" class="input-text" placeholder="" name="yuan_zhanshi_pic" value="<?php echo $goodsinfo['goods_zhanshi'] ?>">
 					                </div>
-							</div>
+							</div> -->
 					<div class="row cl mt-20">
 						<div class="formControls col-xs-8 col-sm-9"align="center">
 							<input class="btn btn-primary radius" type="submit"  value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
@@ -538,6 +586,15 @@
                     
 				});
 			</script>
+			<script type="text/javascript">
+					$('#label-input input').iCheck({
+					checkboxClass: 'icheckbox-blue',
+					radioClass: 'iradio-blue',
+					increaseArea: '20%'
+				})
+			</script>
+			<script type="text/javascript" src="/Public/lib/icheck/icheck.css"></script>
+			<script type="text/javascript" src="/Public/lib/icheck/jquery.icheck.min.js"></script>
 	</body>
 
 </html>

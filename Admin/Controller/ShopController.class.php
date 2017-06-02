@@ -2,7 +2,7 @@
 namespace Admin\Controller;
 use Think\Controller;
 class ShopController extends Controller {
-		  public function _initialize() {
+		public function _initialize() {
         if ($_SESSION['manager_name'] == NULL) {
             $this->success('请先登陆', U('Admin/Manager/login'));
             exit();
@@ -19,7 +19,13 @@ class ShopController extends Controller {
             $this->display('showOne');exit;
 		}
 		$model = M('shop');
-		$count = $model->count();
+        if(!empty($_POST['shop_name'])){
+            $title['shop_name']= array('LIKE','%'.$_POST['shop_name'].'%');
+            $title['shop_position']= array('LIKE','%'.$_POST['shop_name'].'%');
+            $title['_logic'] = 'or';
+            $where['_complex'] = $title;
+        }
+		$count = $model->where($where)->count();
         $Page = new \Think\Page($count,10);
         $Page -> setConfig('prev','上一页');
 		$Page -> setConfig('next','下一页');
@@ -27,7 +33,7 @@ class ShopController extends Controller {
 		$Page -> setConfig('last','末页');
 		$Page -> lastSuffix = false;	//将末页从数字的显示方式切换成汉字提示
         $show = $Page->show();
-        $list = $model->order('shop_id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+        $list = $model->where($where)->order('shop_id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
 		$this->assign('shop', $list);
 		$this->assign('page', $show);
 		$this->display();

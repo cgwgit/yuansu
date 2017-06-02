@@ -43,10 +43,10 @@
 						<tr class="text-c">
 							<th width="25"></th>
 							<th width="80">分类ID</th>
+							<th width="180">分类logo</th>
 							<th width="120">分类名称</th>
 							<th width="120">分类pid</th>
 							<th width="120">分类等级</th>
-							<th width="180">分类logo</th>
 							<th width="180">添加时间</th>
 							<th width="180">修改时间</th>
 							<th width="180">操作</th>
@@ -56,10 +56,10 @@
 					<?php if(is_array($category)): foreach($category as $key=>$v): ?><tr class="text-c">
 							<td><input type="checkbox" id="aid" name="huodong" value="<?php echo $v['cat_id'] ?>" /></td>
 							<td><?php echo $v['cat_id'] ?></td>
+							<td><img src="<?php echo (substr($v['cat_logo'],1)) ?>" width="50" height="50"></td>
 							<td><?php echo str_repeat('--/',$v['cat_level']); echo $v['cat_name'] ?></td>
 							<td><?php echo $v['cat_pid'] ?></td>
 							<td><?php echo $v['cat_level'] ?></td>
-							<td><img src="<?php echo (substr($v['cat_logo'],1)) ?>" width="50" height="50"></td>
 							<td><?php echo date('Y-m-d H:i:s', $v['cat_addtime']) ?></td>
 							<td><?php echo date('Y-m-d H:i:s', $v['cat_uptime']) ?></td>
 							<td class="td-manage">

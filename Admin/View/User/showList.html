@@ -26,6 +26,13 @@
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 会员员管理 <span class="c-gray en">&gt;</span> 会员列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
+        <form method="post" id="myFormId" action="__CONTROLLER__/showList">
+			<div class="text-c">
+				会员昵称：<input type="text" name="user_name" placeholder="请输入会员昵称" style="width:150px" class="input-text">
+				<button name="" id="tijiao" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+			</div>
+		</form>
+	<div class="mt-20">
 	<table class="table table-border table-bordered table-bg">
 		<thead>
 			<tr>
@@ -33,9 +40,10 @@
 			</tr>
 			<tr class="text-c">
 				<th width="40">ID</th>
+				<th width="130">会员头像</th>
 				<th width="150">会员昵称</th>
 				<th width="150">会员手机号</th>
-				<th width="130">会员头像</th>
+				<th width="130">会员所在城市</th>
 				<th width="130">会员关注时间</th>
 				<th width="130">操作</th>
 				</if>
@@ -45,9 +53,10 @@
 		   <foreach name="user" item="v">
 			<tr class="text-c">
 				<td><?php echo $v['user_id'] ?></td>
+				<td><img width="40" height="40" src="<?php echo $v['user_img'] ?>"></td>
 				<td><?php echo $v['user_name'] ?></td>
 				<td><?php echo $v['user_tel'] ?></td>
-				<td><img width="40" height="40" src="<?php echo $v['user_img'] ?>"></td>
+				<td><?php echo $v['city'] ?></td>
 				<td><?php echo date('Y-m-d H:i:s', $v['user_register_time']) ?></td>
 				<td class="td-manage">
 							<a title="删除" href="javascript:;" onclick="activity_del(this,'<?php echo $v['user_id'] ?>')" class="ml-10" style="text-decoration:none">
@@ -58,7 +67,14 @@
 			</foreach>
 		</tbody>
 	</table>
+	</div>
+<div class="pagination ue-clear">
+				<div id="page" class="page">
+						<?php echo $page ?>
+			     </div>
 </div>
+</div>
+
 <!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" src="__PUBLIC__/lib/jquery/1.9.1/jquery.min.js"></script> 
 <script type="text/javascript" src="__PUBLIC__/lib/layer/2.4/layer.js"></script>

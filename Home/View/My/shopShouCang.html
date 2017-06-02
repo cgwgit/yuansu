@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>店铺列表</title>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/Qian/css/reset.css">
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/Qian/css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/Qian/css/index.css" />		
+    	<link rel="stylesheet" href="__PUBLIC__/Qian/css/cityPicker.css"/>
+		<link rel="stylesheet" href="__PUBLIC__/Qian/lib/weui.min.css">
+		<script src="__PUBLIC__/Qian/js/jquery-2.1.4.min.js"></script>
+		<script src="__PUBLIC__/Qian/js/cityPicker.js"></script>
+	</head>
+	<body class="min-width">
+		<div class="storelists ui-width-100">
+		  <foreach name="shops" item="v">
+			   <div class="item-store"> 
+			       <a class="s-top ui-width-100 ui-flex" href="__MODULE__/Shop/shopDetail/shop_id/{$v['shop_id']}">
+						<img src="<?php echo substr($v['shop_logo'],1) ?>" class="s-img"/>
+						<div class="s-message">
+							<h4>{$v['shop_name']}</h4>
+							<div class="s-address">
+								{$v['shop_position']}
+							</div>
+						</div>
+					</a>
+					<div class="s-bottom-block ui-width-100">
+						<ul>
+							<li>
+								
+								<a href="" class="db-block">
+									<a href="__MODULE__/Shop/daohang/shop_id/{$v['shop_id']}" class="db-block"> <i class="icon iconfont">&#xe66c;</i> 一键导航</a>
+								</a>
+							</li>
+						</ul>
+					</div>
+			   </div>
+		 </foreach>
+		</div>
+		<script src="__PUBLIC__/Qian/js/jquery-weui.js"></script>
+	</body>
+</html>

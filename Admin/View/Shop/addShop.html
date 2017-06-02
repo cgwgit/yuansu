@@ -30,7 +30,6 @@
 
     <body>
         <div class="page-container">
-        <div style=" margin:auto;width:700px;height:300px;border:2px solid gray; margin-bottom:50px;" id="container"></div>
             <article class="page-container pl-20 pr-20">
                 <form class="form form-horizontal" id="form-article-add" method="post" action="__CONTROLLER__/addShop" enctype="multipart/form-data" onsubmit="return false">
                     <div class="row cl">
@@ -43,7 +42,17 @@
                         <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>门店地址：</label>
                         <div class="formControls col-xs-8 col-sm-9">
                             <input type="text" id="where" class="input-text" value="" placeholder=""  name="shop_Position">
-                           <input id="but" type="button" value="地图查找" onClick="sear(document.getElementById('where').value);" />
+                           <input id="but" type="button" value="地图查找" onClick="sear(document.getElementById('where').value);" class="btn btn-primary radius mt-10" />
+                        </div>
+                    </div>
+
+        
+                     <div class="row cl">
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>地图查找：</label>
+                        <div class="formControls col-xs-8 col-sm-9">
+                           <div style=" margin:auto;width:60%;height:300px;border:2px solid gray; margin-bottom:50px;" id="container">
+                               
+                           </div>
                         </div>
                     </div>
                     <div class="row cl">
@@ -58,12 +67,12 @@
                             <input class="input-text" type="text" id="lonlat2" name="lonlat2"  maxlength="9">
                         </div>
                     </div>
-                    <div class="row cl">
+                    <!-- <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>门店电话：</label>
                         <div class="formControls col-xs-8 col-sm-9">
                             <input type="text" class="input-text" value="" placeholder=""  name="shop_Tel">
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>营业时间：</label>
                         <div class="formControls col-xs-3 col-sm-3">
@@ -108,6 +117,7 @@
                                     <label class="form-label col-xs-4 col-sm-2">门店logo图:</label>
                                     <div class="formControls col-xs-8 col-sm-9">
                                         <input type="file" class="input-text" value="20" placeholder="" name="shop_logo">
+                                          图片尺寸：(640*640px)
                                     </div>
                                 </div>
                     </div>
@@ -122,6 +132,7 @@
                                     <label class="form-label col-xs-4 col-sm-2"><span class="STYLE19" onclick="add_pics()">[+]&nbsp;</span>门店展示图:</label>
                                     <div class="formControls col-xs-8 col-sm-9">
                                         <input type="file" class="input-text" value="20" placeholder="" name="shop_pic[]">
+                                        图片尺寸：(640*640px)
                                     </div>
                                 </div>
                     </div>

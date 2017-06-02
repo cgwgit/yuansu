@@ -111,25 +111,49 @@
 									<input type="text" class="input-text" value="" placeholder=""  name="tedian">
 								</div>
 							</div>
-							<div class="row cl">
+							<div class="row cl" id="label-input">
 								<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>首页展示：</label>
 								<div class="formControls col-xs-8 col-sm-9">
-									是<input type="radio" value="1" placeholder=""  name="status">
-									否<input type="radio" value="0" placeholder="" checked="checked" name="status">
+									<div class="radio-box">
+									    <input type="radio" value="1" name="status">
+									    <label for="radio-1">是</label>
+									  </div>
+									<div class="radio-box">
+									    <input type="radio" value="0" name="status" checked="checked">
+									    <label for="radio-1">否</label>
+									  </div>
+
+									<!-- 是<input type="radio" value="1" placeholder=""  name="status">
+									否<input type="radio" value="0" placeholder="" checked="checked" name="status"> -->
 								</div>
 							</div>
 							<div class="row cl mt-20 mb-20">
 									<label class="form-label col-xs-4 col-sm-2">产品logo图：</label>
 									<div class="formControls col-xs-8 col-sm-9">
 					                    <input type="file" class="input-text" value="20" placeholder="" name="logo_pic">
+					                    图片尺寸：(672*452px)
 					                </div>
 							</div>
-							<div class="row cl mt-20 mb-20">
+							<script type="text/javascript">
+							  function add_pics(){
+	                          $('#gallery-tab-show').append(' <div class="aa"><label class="form-label col-xs-4 col-sm-2"><span class="STYLE19" onclick="$(this).parent().parent().remove()">[-]&nbsp;</span>产品展示图:</label><div class="formControls col-xs-8 col-sm-9"><input type="file" class="input-text" value="20" placeholder="" name="zhanshi_pic[]"></div></div>');
+	                        }
+							</script>
+							<div class="row cl mt-20 mb-20" id="gallery-tab-show">
+                                <div class="aa">
+                                    <label class="form-label col-xs-4 col-sm-2"><span class="STYLE19" onclick="add_pics()">[+]&nbsp;</span>产品展示图：</label>
+                                    <div class="formControls col-xs-8 col-sm-9">
+                                        <input type="file" class="input-text" value="20" placeholder="" name="zhanshi_pic[]">
+                                        图片尺寸：(750*580px)
+                                    </div>
+                                </div>
+                    </div>
+							<!-- <div class="row cl mt-20 mb-20">
 									<label class="form-label col-xs-4 col-sm-2">产品展示图：</label>
 									<div class="formControls col-xs-8 col-sm-9">
 					                    <input type="file" class="input-text" value="20" placeholder="" name="zhanshi_pic">
 					                </div>
-							</div>
+							</div> -->
 					</article>
 				</div>
 				<script type="text/javascript">
@@ -151,6 +175,7 @@
 									<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>图片：</label>
 									<div class="formControls col-xs-8 col-sm-9">
 					                    <input type="file" class="input-text" value="20" placeholder="" id="articlesort" name="jianjie_pic[]">
+					                    图片尺寸：(400*400px)
 					                </div>
 								</div>
 								<div class="row cl">
@@ -188,6 +213,7 @@
 									<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>图片：</label>
 									<div class="formControls col-xs-8 col-sm-9">
 					                    <input type="file" class="input-text" value="20" placeholder="" name="yingyong_pic[]">
+					                    图片尺寸：(400*400px)
 					                </div>
 								</div>
 								<div class="row cl">
@@ -225,6 +251,7 @@
 									<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>图片：</label>
 									<div class="formControls col-xs-8 col-sm-9">
 					                    <input type="file" class="input-text" value="20" placeholder="" name="shipin_pic[]">
+					                    图片尺寸：(400*400px)
 					                </div>
 								</div>
 								<div class="row cl">
@@ -294,6 +321,15 @@
 			});
 				});
 			</script>
+			<script type="text/javascript">
+					$('#label-input input').iCheck({
+					checkboxClass: 'icheckbox-blue',
+					radioClass: 'iradio-blue',
+					increaseArea: '20%'
+				})
+			</script>
+			<script type="text/javascript" src="/Public/lib/icheck/icheck.css"></script>
+			<script type="text/javascript" src="/Public/lib/icheck/jquery.icheck.min.js"></script>
 	</body>
 
 </html>

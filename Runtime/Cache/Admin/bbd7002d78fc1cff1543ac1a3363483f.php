@@ -99,9 +99,10 @@
             focusCleanup: true,
             success: "valid",
             submitHandler: function(form) {
+                var index = layer.load(0, {shade: false});
                 $(form).ajaxSubmit({
                     type: 'post',
-                    url: "/index.php/Admin/Category/editCategory/>",
+                    url: "/index.php/Admin/Category/editCategory/",
                     data: $("form").serialize(),
                     dataType: "json",
                     success: function(data) {
@@ -113,6 +114,7 @@
                                 window.location.href = "/index.php/Admin/Category/showList";
                         });
                         } else if(data.code == 0) {
+                            layer.close(index);
                             layer.msg(data.msg, {
                                 icon: 2,
                                 time: 1000

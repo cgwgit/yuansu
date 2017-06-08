@@ -4,6 +4,7 @@ use Think\Controller;
 class IndexController extends Controller {
 	//产品主页
     public function index(){
+        //如果存在session信息
         if(session('openid')){
             $Logos = M('banner')->select();
             $xinpins = M('xinpin')->select();
@@ -21,6 +22,7 @@ class IndexController extends Controller {
         }else{
             $model = new \Home\Model\WechatModel();
             $openid_accesstoken = $model->openId();
+            //去数据库查询该用户是否存在
             $rst = M('user')->where(array('user_openid' => $openid_accesstoken['openid']))->find();
             if($rst){
                 session('openid',$openid_accesstoken['openid']);
@@ -39,13 +41,14 @@ class IndexController extends Controller {
                 $this->assign('logos', $Logos);
                 $this->display();exit;
             }else{
+                //获取用户信息（要注意对用户昵称进行过滤处理）
                 $userInfo = $model->getOpenId($openid_accesstoken['openid'],$openid_accesstoken['access_token']);
                 $data = array(
                     'user_img' => $userInfo['headimgurl'],
                     'user_openid' => $userInfo['openid'],
                     'user_name' => filter($userInfo['nickname']),
                     'user_register_time' => time(),
-                    'city' => $userInfo['city'].'-'.$userInfo['province'],
+                    'city' => $userInfo['province'].'-'.$userInfo['city'],
                     );
                 $id = M('user')->add($data);
                 session('openid', $userInfo['openid']);

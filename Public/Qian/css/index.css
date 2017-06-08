@@ -493,12 +493,11 @@
 }
 /*empty-store*/
 .empty-store{
-	width: 100%;
-	position: absolute;
-	top: 25%;
-	text-align: center;
-	color: #c5c5c5;
-	font-size: 16px;
+    width: 100%;
+    text-align: center;
+    color: #c5c5c5;
+    font-size: 16px;
+    margin-top: 25%;
 }
 .empty-store i{
 	font-size: 100px;
@@ -521,6 +520,22 @@
 	color: #d81f07;
 	vertical-align: middle;
 	margin-left: 5px;
+}
+/*pay-success*/
+.register-success {
+	width: 250px;
+	height: 250px;
+	text-align: center;
+	color: #666;
+	font-size: 16px;
+	color: #666;
+}
+.register-success i {
+	font-size: 70px;
+	color: #04BE02;
+}
+.product_xq img{
+	max-width:100%;
 }
 @media only screen and (max-width: 320px) {
 	.slideTxtBox .bd .right {

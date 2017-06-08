@@ -10,8 +10,11 @@
 		<link rel="stylesheet" type="text/css" href="__PUBLIC__/Qian/css/myself.css">
 		<link rel="stylesheet" type="text/css" href="__PUBLIC__/Qian/css/index.css" />
 		<link rel="stylesheet" href="__PUBLIC__/Qian/lib/weui.css">
+		<link rel="stylesheet" href="//cdn.bootcss.com/weui/0.4.3/style/weui.min.css">
+        <link rel="stylesheet" href="//cdn.bootcss.com/jquery-weui/0.8.3/css/jquery-weui.min.css">
+		<script src="__PUBLIC__/Qian/js/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/Qian/js/layer.js"></script>
 	</head>
-
 	<body style="background: #f0f0f2;">
 		<div id="main">
 			<div class="gd"></div>
@@ -39,7 +42,7 @@
 						<li class="lt ritpc" style="margin-left: 6%;">
 							<p>手机号</p>
 							<div class="jsd_content">
-								<input type="text" name="user_tel" value="{$user['user_tel']}" />
+								<input type="tel" name="user_tel" value="{$user['user_tel']}" />
 							</div>
 						</li>
 					</ul>
@@ -54,10 +57,32 @@
 					</ul>
 				</div>
 			<div class="box-btn-md" style="background: none;">
-			    <input type="submit" value="保存" class="btn-md"></input>
-				<!-- <a href="storelists.html" class="btn-md">保存 </a> -->
+				<a href="javascript:void(0)" class="btn-md" id="tijiao">保存 </a>
 			</div>
 			</form>
 	</body>
-
+    <script type="text/javascript">
+    	$(function(){
+    		$("#tijiao").click(function(){
+    			var name = $('input[name="user_name"]').val();
+    			if(!name){
+    				layer.msg('姓名不能为空');return;
+    			}
+    			if(name.length > 10){
+    				layer.msg('姓名的长度太长');return;
+    			}
+    			var area = $('input[name="city"]').val();
+    			if(!area){
+    				layer.msg('地区不能为空');return;
+    			}
+    			var tel = $('input[name="user_tel"]').val();
+    			if(tel != '' && !(/^1\d{10}$/.test(tel))){
+    				layer.msg('请输入正确的手机号');return;
+    			}
+    			$.showLoading("正在加载...");
+    			$("form").submit();
+    		})
+    	})
+    </script>
+     <script src="//cdn.bootcss.com/jquery-weui/0.8.3/js/jquery-weui.min.js"></script>
 </html>

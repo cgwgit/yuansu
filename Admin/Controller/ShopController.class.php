@@ -51,7 +51,7 @@ class ShopController extends Controller {
 			$data = array(
                     'shop_name' => $shop_Name ,
                     'shop_position' => $shop_Position,
-                    'shop_tel' => $post['shop_Tel'],
+                    'shop_tel' => '',
                     'shop_jing' => $post['lonlat'],
                     'shop_wei' => $post['lonlat2'],
                     'shop_stime' => $post['shop_Stime'],
@@ -89,7 +89,7 @@ class ShopController extends Controller {
 				    'shop_id' => $post['shop_id'],
                     'shop_name' => $shop_Name ,
                     'shop_position' => $shop_Position,
-                    'shop_tel' => $post['shop_Tel'],
+                    'shop_tel' => '',
                     'shop_jing' => $post['lonlat'],
                     'shop_wei' => $post['lonlat2'],
                     'shop_stime' => $post['shop_Stime'],

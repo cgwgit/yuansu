@@ -37,58 +37,49 @@
 				<div class="row cl order-border-b pt-5 pb-5">
 					<label class="form-label col-xs-4 col-sm-2 text-r">订单号：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						20170528
+						<?php echo ($order_Info['order_bianhao']); ?>
 					</div>
 				</div>
 				<div class="row cl order-border-b pt-5 pb-5">
 					<label class="form-label col-xs-4 col-sm-2 text-r">产品名称：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						阿波罗厨储酿器
+						<?php echo ($order_Info['goods_title']); ?>
 					</div>
 				</div>
 				<div class="row cl order-border-b pt-5 pb-5">
 					<label class="form-label col-xs-4 col-sm-2 text-r">产品价格：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						￥288
+						<?php echo ($order_Info['order_price']); ?>
 					</div>
 				</div>
 				<div class="row cl order-border-b pt-5 pb-5">
 					<label class="form-label col-xs-4 col-sm-2 text-r">收货人：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						李伟
+						<?php echo ($order_Info['order_name']); ?>
 					</div>
 				</div>
 				<div class="row cl order-border-b pt-5 pb-5">
 					<label class="form-label col-xs-4 col-sm-2 text-r">联系电话：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						18363652222
+						<?php echo ($order_Info['tel']); ?>
 					</div>
 				</div>
 				<div class="row cl order-border-b pt-5 pb-5">
 					<label class="form-label col-xs-4 col-sm-2 text-r">收货地址：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						山东省青岛市市北区利群宇恒大厦21楼
+						<?php echo ($order_Info['area']); echo ($order_Info['area_detail']); ?>
 					</div>
-				</div>
-			</div>
-			<div class="page-container">
-
-				<div class="row cl order-border-b pt-5 pb-5">
-					<label class="form-label col-xs-4 col-sm-2 text-r">物流信息：</label>
 				</div>
 				<div class="row cl order-border-b pt-5 pb-5">
 					<label class="form-label col-xs-4 col-sm-2 text-r">快递方式：</label>
-					<!--<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" name="" id="" placeholder="" value="" class="input-text" style="width:90%">
-					</div>-->
 					<div class="formControls col-xs-8 col-sm-9">
-						顺丰快递
+						<?php echo ($order_Info['fahuo_danwei']); ?>
 					</div>
 				</div>
 				<div class="row cl order-border-b pt-5 pb-5">
 					<label class="form-label col-xs-4 col-sm-2 text-r">物流单号：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						899523654489
+						<?php echo ($order_Info['fahuo_danhao']); ?>
 					</div>
 				</div>
 			</div>

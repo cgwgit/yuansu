@@ -1,6 +1,5 @@
-<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title>知厨系列</title>
@@ -42,7 +41,9 @@
 				<ul>
 				  <?php if(is_array($goods)): foreach($goods as $key=>$vv): if($v['cat_id'] == $vv['cat_id']): ?><li>
 						<a href="/index.php/Home/Index/goods_detail/goods_id/<?php echo ($vv['goods_id']); ?>">
-							<img src="<?php echo (substr($vv['goods_logo'],1)) ?>" class="ui-width-100" />
+							<!-- <img src="<?php echo (substr($vv['goods_logo'],1)) ?>" class="ui-width-100" /> -->
+							<img data-original="<?php echo (substr($vv['goods_logo'],1)) ?>" src="/Public/Qian/js/grey.gif"
+		                     class="ui-width-100" />
 						</a>
 					</li><?php endif; endforeach; endif; ?>
 					<div class="clear">
@@ -51,7 +52,17 @@
 				</ul>
 			</div><?php endforeach; endif; ?>
 		<script src="/Public/Qian/js/jquery-weui.js"></script>
-
+       <!--  <script src="/Public/Qian/js/jquery-1.7.js" type="text/javascript"
+		charset="utf-8"></script> -->
+	   <script src="/Public/Qian/js/jquery.lazyload.js" type="text/javascript"
+		charset="utf-8"></script>
+	  <script type="text/javascript" charset="utf-8">
+		$(function() {
+			$("img").lazyload({
+				effect : "fadeIn"
+			});
+		});
+	  </script>
 	</body>
 
 </html>

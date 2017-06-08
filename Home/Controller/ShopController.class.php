@@ -12,19 +12,19 @@ class ShopController extends Controller {
 	    	// 5公里范围是5000
 	    	$longitude = $post['longitude'];//经度信息
 	    	$latitude = $post['latitude'];//纬度信息
-	    	// $sql = "select * from (select shop_id,shop_name,shop_tel,shop_position,shop_logo,  ROUND(6378.138*2*ASIN(SQRT(POW(SIN(($latitude*PI()/180-`shop_wei`*PI()/180)/2),2)+COS($latitude*PI()/180)*COS(`shop_wei`*PI()/180)*POW(SIN(($longitude*PI()/180-`shop_jing`*PI()/180)/2),2)))*1000) AS distance from sp_shop order by distance ) as a where a.distance<=5000";
-	    	$sql = "select * from (select shop_id,shop_name,shop_tel,shop_position,shop_logo, ROUND(6378.138*2*ASIN(SQRT(POW(SIN((36.09297*PI()/180-`shop_wei`*PI()/180)/2),2)+COS(36.09297*PI()/180)*COS(`shop_wei`*PI()/180)*POW(SIN((120.3743*PI()/180-`shop_jing`*PI()/180)/2),2)))*1000) AS distance from sp_shop order by distance ) as a where a.distance<=5000";
+	    	$sql = "select * from (select shop_id,shop_name,shop_tel,shop_position,shop_logo,  ROUND(6378.138*2*ASIN(SQRT(POW(SIN(($latitude*PI()/180-`shop_wei`*PI()/180)/2),2)+COS($latitude*PI()/180)*COS(`shop_wei`*PI()/180)*POW(SIN(($longitude*PI()/180-`shop_jing`*PI()/180)/2),2)))*1000) AS distance from sp_shop order by distance ) as a where a.distance<=5000";
+	    	// $sql = "select * from (select shop_id,shop_name,shop_tel,shop_position,shop_logo, ROUND(6378.138*2*ASIN(SQRT(POW(SIN((36.09297*PI()/180-`shop_wei`*PI()/180)/2),2)+COS(36.09297*PI()/180)*COS(`shop_wei`*PI()/180)*POW(SIN((120.3743*PI()/180-`shop_jing`*PI()/180)/2),2)))*1000) AS distance from sp_shop order by distance ) as a where a.distance<=5000";
 	    	$shopInfo = M()->query($sql);
 	    	echo json_encode($shopInfo);exit;
     	}else{
             if(session('openid')){
-
-                //获取微信签名包信息
+                //获取微信签名包信息（用户地理位置的获取）
                 $jssdk = new \Home\Model\WechatModel();
                 $signPackage = $jssdk->GetSignPackage();
                 $this->assign('signPackage', $signPackage);
             	$this->display();
             }else{
+                //判断该用户是否存在
                  $model = new \Home\Model\WechatModel();
                  $openid_accesstoken = $model->openId();
                  $rst = M('user')->where(array('user_openid' => $openid_accesstoken['openid']))->find();
@@ -36,15 +36,15 @@ class ShopController extends Controller {
                     $this->assign('signPackage', $signPackage);
                     $this->display();exit;
                 }else{
+                    //如果不存在获取微信用户的基本信息
                     $userInfo = $model->getOpenId($openid_accesstoken['openid'],$openid_accesstoken['access_token']);
                     $data = array(
                         'user_img' => $userInfo['headimgurl'],
                         'user_openid' => $userInfo['openid'],
                         'user_name' => filter($userInfo['nickname']),
                         'user_register_time' => time(),
-                        'city' => $userInfo['city'],
-                        'province' => $userInfo['province']
-                        );
+                        'city' => $userInfo['province'].'-'.$userInfo['city'],
+                    );
                     $id = M('user')->add($data);
                     session('openid', $userInfo['openid']);
                     session('user_id',$id);

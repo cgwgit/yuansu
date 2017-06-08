@@ -11,6 +11,7 @@ class WechatModel extends Model {
         $this->appid = C('APPID');//公众号的appid
         $this->appsecret = C('APPSECRET');//公众号的秘钥
     }
+    //调用js-sdk的签名包
     public function getSignPackage() {
 	    $jsapiTicket = $this->getJsApiTicket();
 	    // 注意 URL 一定要动态获取，不能 hardcode.（获取当前网页的url）
@@ -22,6 +23,7 @@ class WechatModel extends Model {
 	    $nonceStr = $this->createNonceStr();
 	    // 这里参数的顺序要按照 key 值 ASCII 码升序排序
 	    $string = "jsapi_ticket=$jsapiTicket&noncestr=$nonceStr&timestamp=$timestamp&url=$url";
+	    //生成字符串是用来签名用的
 	    $signature = sha1($string);
 	    $signPackage = array(
 	      "appId"     => $this->appid,
@@ -32,6 +34,46 @@ class WechatModel extends Model {
 	      "rawString" => $string
 	    );
 	    return $signPackage; 
+  }
+  //使用会员卡领取的签名包
+  public function getHuiYuanSignPackage() {
+	    $apiTicket = $this->getApiTicket();
+	    // 注意 URL 一定要动态获取，不能 hardcode.（获取当前网页的url）
+	    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+	    $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+	    //时间戳
+	    $timestamp = time();
+	    //随机字符串获取
+	    // $nonceStr = $this->createNonceStr();
+	    // 这里参数的顺序要按照 key 值 ASCII 码升序排序
+	    $string = $timestamp.$apiTicket."pVYA_t3RCVF_yhNcO6QCeAmb-1UI";
+	    //生成字符串是用来签名用的
+	    $signature = sha1($string);
+	    $signPackage = array(
+	      "timestamp" => $timestamp,
+	      "signature" => $signature,
+	    );
+	    return $signPackage; 
+  }
+  //获取会员卡的api_ticket
+  public function getApiTicket(){
+  	$data = json_decode(file_get_contents("api_ticket.json"));
+    if ($data->expire_time < time()) {
+      $accessToken = $this->getAccessToken();
+      $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=wx_card&access_token=$accessToken";
+      $res = json_decode($this->httpGet($url));
+      $ticket = $res->ticket;
+      if ($ticket) {
+        $data->expire_time = time() + 7000;
+        $data->jsapi_ticket = $ticket;
+        $fp = fopen("api_ticket.json", "w");
+        fwrite($fp, json_encode($data));
+        fclose($fp);
+      }
+    } else {
+      $ticket = $data->jsapi_ticket;
+    }
+    return $ticket;
   }
   //获取随机字符串
   private function createNonceStr($length = 16) {
@@ -51,13 +93,13 @@ class WechatModel extends Model {
 	      $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$this->appid&secret=$this->appsecret";
 	      $res = json_decode($this->httpGet($url));
 	      $access_token = $res->access_token;
-		      if ($access_token) {
+		  if ($access_token) {
 		        $data->expire_time = time() + 7000;
 		        $data->access_token = $access_token;
 		        $fp = fopen("access_token.json", "w");
 		        fwrite($fp, json_encode($data));
 		        fclose($fp);
-		      }
+		   }
 	    } else {
 	      $access_token = $data->access_token;
 	    }

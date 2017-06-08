@@ -131,7 +131,7 @@
 		</a>
 		<div class="decoration">
 		</div>
-		<foreach name="categorys" item="v">
+		<foreach name="categorys" item="v" key="k">
 			<div class="index-category ui-width-100">
 				<!--厨-->
 				<div class="item-category ui-width-100">
@@ -150,7 +150,7 @@
 						</foreach>
 						<li class="fl right-open">
 							<a href="__CONTROLLER__/goods_list/cat_id/{$v['cat_id']}">
-								<img src="__PUBLIC__/Qian/images/icon1_03.jpg?id=2016" class="ui-width-100" />
+								<img src="__PUBLIC__/Qian/images/icon{$k}_03.jpg?id=2016" class="ui-width-100" />
 							</a>
 						</li>
 						<div class="clear">

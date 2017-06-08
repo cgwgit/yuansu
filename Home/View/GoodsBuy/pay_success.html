@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>支付成功</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no, maximum-scale=1.0">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="telephone=no" name="format-detection">
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/Qian/css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/Qian/css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/Qian/css/index.css" />
+		<script type="text/javascript" src="__PUBLIC__/Qian/js/jquery-1.10.1.min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				var _w = parseInt($(window).width()); //获取浏览器的宽度
+				var _h = parseInt($(window).height()); //获取浏览器的高度
+				var realWidth = $(".register-success").width(); //元素的宽度
+				var realHeight = $(".register-success").height(); //元素的高度
+
+				var left_des = (_w - realWidth) / 2;
+				var top_des = (_h - realHeight) / 2;
+
+				$(".register-success").css({
+					"position": "fixed",
+					"top": top_des,
+					"left": left_des
+				});
+			})
+		</script>
+	</head>
+
+	<body>
+		<div class="page-group">
+			<div class="page">
+				<div class="content" style="background: #fff;">
+					<div class="register-success">
+						<i class="icon iconfont color-success">&#xe635;</i>
+						<P>恭喜您支付成功</P>
+					</div>
+				</div>
+			</div>
+	</body>
+
+</html>

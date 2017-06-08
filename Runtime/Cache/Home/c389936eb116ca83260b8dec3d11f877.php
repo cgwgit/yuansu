@@ -78,21 +78,6 @@
 			<input type="text" value="青岛市" class="city" id="quxiao" readonly="true" style="width:50px;overflow: hidden;max-width: 50px;display: inline-block;height: 40px;border:0;background:none;float: left;" >
 				<i class="icon iconfont" style="color: #4b4949;display: inline-block;float: left;vertical-align: middle;">&#xe60e;</i>
 			</div>
-	<!-- 		<div class="weui-search-bar" id="searchBar" >
-			<form class="weui-search-bar__form" >
-				<div class="weui-search-bar__box">
-					<i class="weui-icon-search"></i>
-					<input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">
-					<a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
-				</div>
-				<label class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
-		          <i class="weui-icon-search"></i>
-		          <span>搜索</span>
-		        </label>
-			</form>
-			<a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
-		</div> -->
-		
 		</div>
 		<!--lists-->
 		<div class="storelists ui-width-100" id="list">
@@ -123,6 +108,7 @@
                            });  
                     }else{
 	         	      $(".item-store").remove();
+	         	      $(".empty-store").remove();
 	         	      $("#list").append('<div class="empty-store"> <i class="icon iconfont">&#xe690;</i> <div class="word"> 附近暂时还没有店铺哦~ </div> <div class="box-btn-md" style="background: #f0f0f2;"> <a href="javascript:void(0)" onclick="cityList()" class="btn-md">搜索其他城市门店</a> </div></div>');
 	              }
 				},

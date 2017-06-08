@@ -51,12 +51,12 @@
                             <?php echo ($shopinfo['shop_position']); ?>
                         </div>
                     </div>
-                    <div class="row cl">
+                   <!--  <div class="row cl">
                         <label class="col-xs-4 col-sm-2 text-r">门店电话：</label>
                         <div class="col-xs-8 col-sm-9">
                           <?php echo ($shopinfo['shop_tel']); ?>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row cl">
                         <label class="col-xs-4 col-sm-2 text-r">营业时间：</label>
                         <div class="col-xs-8 col-sm-9">

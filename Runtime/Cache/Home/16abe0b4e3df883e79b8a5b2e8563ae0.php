@@ -127,7 +127,7 @@
 		</a>
 		<div class="decoration">
 		</div>
-		<?php if(is_array($categorys)): foreach($categorys as $key=>$v): ?><div class="index-category ui-width-100">
+		<?php if(is_array($categorys)): foreach($categorys as $k=>$v): ?><div class="index-category ui-width-100">
 				<!--厨-->
 				<div class="item-category ui-width-100">
 					<ul class="ui-width-100">
@@ -141,7 +141,7 @@
 								</li><?php endif; endforeach; endif; ?>
 						<li class="fl right-open">
 							<a href="/index.php/Home/Index/goods_list/cat_id/<?php echo ($v['cat_id']); ?>">
-								<img src="/Public/Qian/images/icon1_03.jpg?id=2016" class="ui-width-100" />
+								<img src="/Public/Qian/images/icon<?php echo ($k); ?>_03.jpg?id=2016" class="ui-width-100" />
 							</a>
 						</li>
 						<div class="clear">

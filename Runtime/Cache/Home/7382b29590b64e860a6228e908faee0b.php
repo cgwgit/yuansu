@@ -9,6 +9,37 @@
 		<link rel="stylesheet" type="text/css" href="/Public/Qian/css/jquery-weui.css">
 		<link rel="stylesheet" type="text/css" href="/Public/Qian/css/myself.css">
 		<script type="text/javascript" src="/Public/Qian/js/jquery-1.10.1.min.js"></script>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script type="text/javascript">
+			//配置信息验证接口
+				 wx.config({
+				    debug: true,
+				    appId: '<?php echo $signPackage["appId"];?>',
+				    timestamp: '<?php echo $signPackage["timestamp"];?>',
+				    nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+				    signature: '<?php echo $signPackage["signature"];?>',
+				    jsApiList: [
+				        // 所有要调用的 API 都要加到这个列表中
+				        'addCard'
+				      ]
+	            });
+				 wx.ready(function(){
+                                //添加卡券
+                document.querySelector('#addCard').onclick = function () {
+                    wx.addCard({
+                      cardList: [
+                        {
+                          cardId: "pVYA_t3RCVF_yhNcO6QCeAmb-1UI",
+                          cardExt: '{"timestamp":"<?php echo $huiyuanPackage['timestamp'] ?>","signature":"<?php echo $huiyuanPackage['signature'] ?>"}'
+                        }
+                      ],
+                      success: function (res) {
+                        alert('已添加卡券：' + JSON.stringify(res.cardList));
+                      }
+                    });
+                };
+            });
+		</script>
 	</head>
 
 	<body style="background: #f0f0f2;">
@@ -101,7 +132,7 @@
 					</li>
 					<li class="rt ritpc">
 						<p>会员卡</p>
-						<div class="right_lq" onclick="function()">
+						<div class="right_lq" id="addCard">
 							立即领取
 						</div>
 					</li>

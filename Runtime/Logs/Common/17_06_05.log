@@ -1,0 +1,12 @@
+[ 2017-06-05T09:03:01+08:00 ] 192.168.20.14 /index.php/My
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000281s ]
+ERR: 无法加载模块:My
+
+[ 2017-06-05T11:23:53+08:00 ] 192.168.20.14 /index.php/pay/order_id/2.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000348s ]
+ERR: 无法加载模块:Pay
+

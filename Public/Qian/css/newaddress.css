@@ -1,0 +1,115 @@
+/*内容*/
+
+#dimension {
+	width: 100%;
+	background: #fff;
+	border-bottom: 1px solid #eee;
+}
+
+#dimension>li {
+	height: 45px;
+	line-height: 45px;
+	width: 100%;
+	font-size: 14px;
+}
+
+#dimension ul {
+	margin-left: 10px;
+	border-bottom: 1px solid #eee;
+	font-size: 14px;
+	color: #000;
+}
+
+#dimension ul li.l1 {
+	width: 20%;
+	float: left;
+	text-align: left;
+	color: #333;
+	margin-right: 15px;
+}
+
+#dimension ul li.l2 {
+	float: left;
+	width: 60%;
+}
+
+#dimension ul li input {
+	border: none;
+	outline: none;
+	width: 100%;
+	color: #333333;
+	font-size: 14px;
+	-webkit-tap-highlight-color: transparent;
+}
+
+
+/*保存*/
+
+#baocun {
+	width: 100%;
+	height: 48px;
+	margin-top: 15px;
+	text-align: center;
+	/* background: #f6f6f6; */
+}
+
+#baocun .btn {
+	width: 90%;
+	height: 45px;
+	line-height: 45px;
+	background: #c30d23;
+	display: block;
+	margin: 20px auto;
+	border-radius: 5px;
+	overflow: hidden;
+	font-size: 16px;
+	color: #fff;
+	text-align: center;
+}
+
+.item_select {
+	width: 30%;
+	margin-right: 3.3%;
+	height: 30px;
+	line-height: 30px;
+	position: relative;
+}
+
+.item_select .city_select {
+	position: absolute;
+	left: 0;
+	top: 5px;
+	height: 35px;
+	line-height: 35px;
+	width: 100%;
+	/*-webkit-appearance: none;*/
+	border: 0;
+	outline: none;
+	-webkit-tap-highlight-color: transparent;
+	font-size: 14px;
+	color: #757575;
+}
+
+.item_select .right_tran {
+	position: absolute;
+	right: 0px;
+	top: 7px;
+	height: 35px;
+	line-height: 35px;
+}
+.box_price{
+	margin: 0 10px;
+	height: 60px;
+	line-height: 60px;
+}
+.box_price .left{
+	width: 50%;
+	font-size: 16px;
+	color: #000000;
+}
+.box_price .right_yf{
+	width: 50%;
+	font-size: 14px;
+	color: #ccc;
+	text-align: right;
+}

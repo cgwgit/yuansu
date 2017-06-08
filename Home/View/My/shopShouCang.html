@@ -15,29 +15,33 @@
 	</head>
 	<body class="min-width">
 		<div class="storelists ui-width-100">
-		  <foreach name="shops" item="v">
-			   <div class="item-store"> 
-			       <a class="s-top ui-width-100 ui-flex" href="__MODULE__/Shop/shopDetail/shop_id/{$v['shop_id']}">
-						<img src="<?php echo substr($v['shop_logo'],1) ?>" class="s-img"/>
-						<div class="s-message">
-							<h4>{$v['shop_name']}</h4>
-							<div class="s-address">
-								{$v['shop_position']}
+		  <empty name="shops">
+		     <div class="empty-store"> <i class="icon iconfont">&#xe690;</i> <div class="word"> 暂时还没有收藏的店铺哦~ </div> </div>
+		  <else />
+			     <foreach name="shops" item="v">
+				   <div class="item-store"> 
+				       <a class="s-top ui-width-100 ui-flex" href="__MODULE__/Shop/shopDetail/shop_id/{$v['shop_id']}">
+							<img src="<?php echo substr($v['shop_logo'],1) ?>" class="s-img"/>
+							<div class="s-message">
+								<h4>{$v['shop_name']}</h4>
+								<div class="s-address">
+									{$v['shop_position']}
+								</div>
 							</div>
+						</a>
+						<div class="s-bottom-block ui-width-100">
+							<ul>
+								<li>
+									
+									<a href="" class="db-block">
+										<a href="__MODULE__/Shop/daohang/shop_id/{$v['shop_id']}" class="db-block"> <i class="icon iconfont">&#xe66c;</i> 一键导航</a>
+									</a>
+								</li>
+							</ul>
 						</div>
-					</a>
-					<div class="s-bottom-block ui-width-100">
-						<ul>
-							<li>
-								
-								<a href="" class="db-block">
-									<a href="__MODULE__/Shop/daohang/shop_id/{$v['shop_id']}" class="db-block"> <i class="icon iconfont">&#xe66c;</i> 一键导航</a>
-								</a>
-							</li>
-						</ul>
-					</div>
-			   </div>
-		 </foreach>
+				   </div>
+			 </foreach>
+	  </empty>
 		</div>
 		<script src="__PUBLIC__/Qian/js/jquery-weui.js"></script>
 	</body>

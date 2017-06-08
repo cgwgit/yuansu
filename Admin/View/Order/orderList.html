@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
 <html>
-
 	<head>
 		<meta charset="utf-8">
 		<meta name="renderer" content="webkit|ie-comp|ie-stand">
@@ -30,83 +29,70 @@
 			<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
 		</nav>
 		<div class="page-container">
-
-			<!--<div class="cl pd-5 bg-1 bk-gray mt-20">
-		<span class="l"><a href="javascript:;" onclick="admin_add('添加管理员','admin-add.html','800','500')" class="btn btn-primary radius">
-			<i class="Hui-iconfont">&#xe600;</i> 添加管理员</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> 
-	</div>-->
+		   <form method="post" id="myFormId" action="__CONTROLLER__/orderList">
+				<div class="text-c">
+				发货状态：<span class="select-box"style=" width:150px;height: 31px">
+						<select name="fahuo_status" class="select">
+						    <option value="">请选择发货状态</option>
+							<option value="0">未发货</option>
+							<option value="1">已发货</option>
+						</select>
+						</span>
+						手机号：<input type="text" name="tel" placeholder="请输入手机号" style="width:150px" class="input-text">
+						<!-- 物流单号：<input type="text" name="" placeholder="请输入物流单号" style="width:150px" class="input-text"> -->
+					<button  class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+				</div>
+			</form>
 			<div id="tab_demo" class="HuiTab">
-				<div class="tabBar clearfix mb-20"><span>未发货</span><span>已发货</span></div>
 				<div class="tabCon">
 					<table class="table table-border table-bordered table-bg mt-20">
 						<thead>
 							<tr>
 							</tr>
 							<tr class="text-c">
-								<th width="25"><input type="checkbox" name="" value=""></th>
 								<th width="40">ID</th>
 								<th width="150">订单号</th>
 								<th>产品名称</th>
 								<th width="130">产品价格</th>
+								<th width="130">姓名</th>
+								<th width="130">手机号</th>
+								<th width="130">地址</th>
 								<th width="130">创建时间</th>
 								<th width="130">状态</th>
 								<th width="130">相关操作</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr class="text-c">
-								<td><input type="checkbox" value="1" name=""></td>
-								<td>1</td>
-								<td>20170525</td>
-								<td>阿波罗厨储酿器</td>
-								<td>￥288</td>
-								<td>2017-5-20 8:24</td>
-								<td><span class="label label-danger radius">未发货</span></td>
-								<td>
-									<a href="javascript:;" class="ml-10" onclick="order_infos('查看订单详情','WeiFaDetail','680','510')">查看订单详情</a>
-									<a style="text-decoration:none" onClick="activity_start(this,'<?php echo $v['id'] ?>')" href="javascript:;" title="发货">
-									<i class="Hui-iconfont">&nbsp;&nbsp;&nbsp;&nbsp;发货</i>
-								</a>
-								</td>
-							</tr>
-						</tbody>
+					<tbody>
+						<foreach name="orders" item="v">
+								<tr class="text-c">
+									<td>{$v['order_id']}</td>
+									<td>{$v['order_bianhao']}</td>
+									<td>{$v['goods_title']}</td>
+									<td>{$v['order_price']}</td>
+									<td>{$v['order_name']}</td>
+									<td>{$v['tel']}</td>
+									<td>{$v['area']}{$v['area_detail']}</td>
+									<td><?php echo date('Y-m-d H:i:s',$v['order_time']) ?></td>
+									<td><if condition="$v['fahuo_status'] == 1"><span class="label label-success radius">已发货</span><else /><span class="label label-danger radius">未发货</span></if></td>
+									<td>
+										<a href="javascript:;" class="ml-10" onclick="order_infos('查看订单详情','__CONTROLLER__/WeiFaDetail/order_id/{$v['order_id']}','680','510')">查看订单详情</a>
+										<if condition="$v['fahuo_status'] == 0">
+											<a style="text-decoration:none" onClick="activity_start(this,'<?php echo $v['order_id'] ?>')" href="javascript:;" title="发货">
+											<i class="Hui-iconfont">&nbsp;&nbsp;&nbsp;&nbsp;发货</i>
+										    </a>
+										</if>
+									</td>
+								</tr>
+						</foreach>
+					</tbody>
 					</table>
 
 				</div>
-				<div class="tabCon">
-					<table class="table table-border table-bordered table-bg mt-20">
-						<thead>
-							<tr>
-							</tr>
-							<tr class="text-c">
-								<th width="25"><input type="checkbox" name="" value=""></th>
-								<th width="40">ID</th>
-								<th width="150">订单号</th>
-								<th>产品名称</th>
-								<th width="130">产品价格</th>
-								<th width="130">创建时间</th>
-								<th width="130">状态</th>
-								<th width="130">相关操作</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="text-c">
-								<td><input type="checkbox" value="1" name=""></td>
-								<td>1</td>
-								<td>20170525</td>
-								<td>阿波罗厨储酿器</td>
-								<td>￥288</td>
-								<td>2017-5-11 8:24</td>
-								<td><span class="label label-success radius">已发货</span></td>
-								<td onclick="order_infos('订单详情','__CONTROLLER__/orderDetail','680','510')">
-									查看订单详情
-								</td>
-							</tr>
-						</tbody>
-					</table>
-
-				</div>
-				
+				<div class="pagination ue-clear" align="left">
+				<div id="page" class="page">
+						<?php echo $page ?>
+			     </div>
+            </div>
 			</div>
 		</div>
 		<!--_footer 作为公共模版分离出去-->
@@ -143,32 +129,26 @@
 			/*活动-开启*/
 			function activity_start(obj, id) {
 				layer.confirm('确认要发货吗？', function(index) {
+					window.location.href="__CONTROLLER__/OrderInfo/order_id/"+id;
 					//此处请求后台程序，下方是成功后的前台处理……
-                           $.ajax({
-						        type: "get",
-						        dataType: "json",
-						        url: '__CONTROLLER__/startAction',
-						        data: {'aid':id},
-						        success: function (data) {
-						            if(data.code == 0) {
-						                layer.msg('请关闭正在进行的活动', {
-												icon: 6,
-												time: 1000
-											});
-						            }else if(data.code == 1){
-						            		$(obj).parents("tr").find(".td-manage").prepend('<a onClick="activity_stop(this,<?php echo $v['id'] ?>)" href="javascript:;" title="关闭" style="text-decoration:none"><i class="Hui-iconfont">&#xe631;</i></a>');
-											$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已开启</span>');
-											$(obj).remove();
-											layer.msg('已开启!', {
-												icon: 6,
-												time: 1000
-											});
-						            }
-
-						        }
+    //                        $.ajax({
+				// 		        type: "get",
+				// 		        dataType: "json",
+				// 		        url: '__CONTROLLER__/faHuo',
+				// 		        data: {'aid':id},
+				// 		        success: function (data) {
+				// 		            if(data.code == 1) {
+				// 		               layer.msg(data.msg,{icon:1,time:1000},function(){
+				// 						window.location.href="__CONTROLLER__/OrderList";
+				// 				       });
+				// 		            }else if(data.code == 0){
+				// 		            	layer.close(index); 
+				// 				        layer.msg(data.msg,{icon:2,time:1000});
+				// 		            }
+				// 		        }
 						   
 				
-				});
+				// });
                  	});
 			}
 		</script>

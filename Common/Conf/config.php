@@ -12,11 +12,9 @@ return array(
     'DB_DEBUG'              =>  TRUE, // 数据库调试模式 开启后可以记录SQL日志
     'DB_FIELDS_CACHE'       =>  true,        // 启用字段缓存
     'DB_CHARSET'            =>  'utf8',      // 数据库编码默认采用utf8
-     'APPSECRET' => '608566b91ce68b2281a69c200698f176',
-     // 'APPSECRET' => '7cb247a4b92bed5bc49243ececd03d39',
-     // "APPID" => 'wx4bdff692a476b307',
-     "APPID" => 'wx2ceec07b58f9bddc',
-     "mchid" => '1277747601',
-     'key' => 'juyuansuqingdao88888123456789012',
+     'APPSECRET' => '',
+     "APPID" => '',
+     "mchid" => '',
+     'key' => '',
     // 'TMPL_EXCEPTION_FILE'   =>  './Public/error.html',// 异常页面的模板文件
 );
